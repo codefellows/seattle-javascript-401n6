@@ -30,7 +30,14 @@ function isSorted(arr) {
 // let sum = ArrayUtils.sumArr([1,2,3,4,5])
 // let min = ArrayUtils.minArr([1,2,3,4,5])
 // let isSorted = ArrayUtils.isSorted([1,2,3,4,5])
-module.exports = {};
-module.exports.sumArr = sumArr;
-module.exports.minArr = minArr;
-module.exports.isSorted = isSorted;
+let oo = {}
+oo.someFunction = someFunction;
+module.exports = oo;
+
+module.exports = {
+  sumArr: sumArr,
+  minArr: minArr,
+  isSorted: isSorted,
+};
+
+module.exports = {sumArr, minArr, isSorted};

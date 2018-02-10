@@ -10,7 +10,8 @@
 // write a for loop that shifts all other values over to fill the now null space
 // manually adjust .length of the array to be one less
 
-// This solution runs in O(N) time
+arr.splice(index, 1)
+
 function remove(arr, index) {
   // erase the value at the given index.
   arr[index] = null;

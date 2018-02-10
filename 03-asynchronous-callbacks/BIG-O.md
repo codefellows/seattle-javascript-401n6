@@ -1,4 +1,6 @@
 # Big-O
+![commong big o curves](CommonBigOs.svg)
+
 big-o is a way of describing the speed and memory usage of an algorithm
 algorithms can run faster or slower given a specific input thus we only use
 big-o to describe the worst case

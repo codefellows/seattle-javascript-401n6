@@ -9,6 +9,8 @@
 // set the index given to null
 // write a for loop that shifts all other values over to fill the now null space
 // manually adjust .length of the array to be one less
+
+// This solution runs in O(N) time
 function remove(arr, index) {
   // erase the value at the given index.
   arr[index] = null;

@@ -19,7 +19,6 @@ function remove(arr, index) {
 
   // adjust the length of the array to show we manually removed an element.
   arr.length = arr.length - 1;
-  return arr;
 }
 
 module.exports = remove;

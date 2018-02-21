@@ -8,6 +8,7 @@ Teaching Assistant: Pending
 
 ## Official Course Links
 * [Course Lecture Repo](https://github.com/codefellows/seattle-javascript-401n6)
+* [Pre-Readings](https://canvas.instructure.com/courses/1275855/discussion_topics)
 * [GitHub Lab Organization](https://github.com/codefellows-seattle-javascript-401n6)
 * [YouTube Playlist](https://www.youtube.com/playlist?list=PLVngfM2hsbi_Il-_TEUJRjD60_O6mXbcT)
 * [Canvas](https://canvas.instructure.com/courses/1275855?invitation=2r8oiMQxWUciByi06iHqPZ3sm4R8D0McaTbPwl6f)

@@ -1,11 +1,10 @@
 function createReminderSync(message, delay) {
   let cycles = 0;
   let start = new Date();
-  let difference = 0;
   while(difference < delay) {
     cycles++
     let now =  new Date();
-    difference = now - start;
+    var difference = now - start;
   }
   console.log(cycles, "Reminder:", message)
 }

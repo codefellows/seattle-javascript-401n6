@@ -15,6 +15,20 @@ Teaching Assistant: Pending
 * [Slack Channel](https://codefellows.slack.com/messages/C90EA7SKH)
 * [Lightning Talks](https://docs.google.com/spreadsheets/d/1ZyS3L9MR8BtZOd6pNxiOoA20DNLj7psTc16vAlesiuM/edit#gid=0)
 
+## Intense Weeks
+The following weeks are either intense weeks or project weeks. Intense weeks
+have lecture Monday/Wednesday and labs Tuesday/Thursday. Project weeks have
+students working on their projects Monday-Thursday.
+
+```Week 1   Intense  February  5th-8th
+Week 5   Intense  March     5th-8th
+Week 9   Project  April     2nd-5th
+Week 10  Project  April     9th-12th
+Week 13  Intense  April     30th-May 3rd
+Week 19  Project  June      11th-14th
+Week 20  Project  June      18th-21st
+```
+
 ## Unofficial Course Links
 * [google docs notetaking](https://docs.google.com/document/d/1h9HvyxZqHfFQRRWhcBwDLLk-IHav06xh7TRpGLvJ1UE/edit)
   * Contact Mitch Hall (`@SCUBAguy`) for access.

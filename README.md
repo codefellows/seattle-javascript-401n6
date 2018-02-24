@@ -1,10 +1,10 @@
 # Seattle 401n6 JavaScript
 
 ## Course Staff
-Instructor: Steve Geluso
-Assistant Instructor: JB Tellez
-Teaching Assistant: Michael Treat
-Teaching Assistant: Pending
+* Instructor: Steve Geluso
+* Assistant Instructor: JB Tellez
+* Teaching Assistant: Michael Treat
+* Teaching Assistant: Pending
 
 ## Official Course Links
 * [Course Lecture Repo](https://github.com/codefellows/seattle-javascript-401n6)
@@ -32,3 +32,22 @@ Week 20  Project  June      18th-21st
 ## Unofficial Course Links
 * [google docs notetaking](https://docs.google.com/document/d/1h9HvyxZqHfFQRRWhcBwDLLk-IHav06xh7TRpGLvJ1UE/edit)
   * Contact Mitch Hall (`@SCUBAguy`) for access.
+
+## Students
+* Aaron	Bruce
+* Alicia Lycan
+* Amber	Kim
+* Brandon	Buchholz
+* Caitlin	Sweeney
+* Cody Green
+* Daniel Pillay
+* Darcy	Knore
+* Eric Cobb
+* Fredric	Rapp
+* Ixius	Procopios
+* Mitchel	Hall
+* Nicholas Damberg
+* Rafael Malave
+* Ronnie Lewis
+* Ryan Johnson
+* Trevor Dobson

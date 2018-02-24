@@ -20,13 +20,25 @@ The following weeks are either intense weeks or project weeks. Intense weeks
 have lecture Monday/Wednesday and labs Tuesday/Thursday. Project weeks have
 students working on their projects Monday-Thursday.
 
-```Week 1   Intense  February  5th-8th
+```
+Week 1   Intense  February  5th-8th
 Week 5   Intense  March     5th-8th
 Week 9   Project  April     2nd-5th
 Week 10  Project  April     9th-12th
 Week 13  Intense  April     30th-May 3rd
 Week 19  Project  June      11th-14th
 Week 20  Project  June      18th-21st
+```
+
+
+## Career Coaching
+```
+Week 6   Tuesday   March 13th
+Week 6   Thursday  March 15th
+Week 12  Tuesday   April 24th
+Week 12  Thursday  April 26th
+Week 16  Tuesday   May   22nd
+Week 16  Thursday  May   24th
 ```
 
 ## Unofficial Course Links

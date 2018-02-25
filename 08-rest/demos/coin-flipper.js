@@ -1,5 +1,6 @@
 class CoinFlipper {
-  constructor(desiredHeadsInARow) {
+  constructor(desiredHeadsInARow, name) {
+    this.name = name || 'unnamed';
     this.desiredHeadsInARow = desiredHeadsInARow;
     this.reset();
   }
@@ -32,7 +33,11 @@ class CoinFlipper {
         } else {
           // resolve only supports up to one parameter.
           // bundle everything in an object or an array to resolve more.
-          resolve({heads: this.currentHeadsInARow, flips: this.flips});
+          resolve({
+            name: this.name,
+            heads: this.currentHeadsInARow,
+            flips: this.flips
+          });
         }
       };
 

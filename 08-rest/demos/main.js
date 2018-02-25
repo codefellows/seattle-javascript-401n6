@@ -40,5 +40,9 @@ flipper.flipToFinish()
 })
 .then((winner) => {
   console.log('Race results:', winner.name, 'won in', winner.flips, 'flips');
+})
+.catch((error) => {
+  console.log(error.name, error.message); 
+  console.log('Everything aborted.');
 });
 console.log('async?');

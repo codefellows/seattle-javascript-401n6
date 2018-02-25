@@ -3,6 +3,7 @@ class CoinFlipper {
     this.name = name || 'unnamed';
     this.desiredHeadsInARow = desiredHeadsInARow;
     this.reset();
+    this.maxFlips = 1000;
   }
   
   reset() {
@@ -25,7 +26,12 @@ class CoinFlipper {
   flipToFinish() {
     return new Promise((resolve, reject) => {
       const flipAgain = () => {
-        if (this.currentHeadsInARow < this.desiredHeadsInARow) {
+        if (this.flips > this.maxFlips) {
+          reject({
+            name: this.name,
+            message: "Rejected for taking too many flips."
+          });
+        } else if (this.currentHeadsInARow < this.desiredHeadsInARow) {
           setTimeout(() => {
             this.flip();
             flipAgain();

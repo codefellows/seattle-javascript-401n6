@@ -30,6 +30,8 @@ class CoinFlipper {
             flipAgain();
           });
         } else {
+          // resolve only supports up to one parameter.
+          // bundle everything in an object or an array to resolve more.
           resolve({heads: this.currentHeadsInARow, flips: this.flips});
         }
       };

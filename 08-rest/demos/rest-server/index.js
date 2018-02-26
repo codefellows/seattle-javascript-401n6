@@ -1,8 +1,9 @@
 const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
+const Router = require('./lib/router');
 
-function text(res) {
+function text(req, res) {
   res.writeHead(200, {
     'Content-Type': 'text/plain'
   });
@@ -10,7 +11,7 @@ function text(res) {
   res.end();
 }
 
-function json(res) {
+function json(req, res) {
   res.writeHead(200, {
     'Content-Type': 'application/json'
   });
@@ -18,12 +19,16 @@ function json(res) {
   res.end();
 }
 
+router = new Router();
+router.get('/text', text);
+router.get('/json', json);
+
 const server = http.createServer((req, res) => {
   console.log('URL:', req.url);
-  if (req.url === '/text') {
-    return text(res);
-  } else if (req.url === '/json') {
-    return json(res);
+  try {
+    router.route(req, res);
+  } catch (error) {
+
   }
 });
 

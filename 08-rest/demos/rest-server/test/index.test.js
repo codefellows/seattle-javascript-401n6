@@ -31,4 +31,12 @@ describe('Server', () => {
       done();
     })
   });
+
+  test('throws 404 if route not found', (done) => {
+    request.get(SERVER_URL + '/notfound')
+    .end((err, res) => {
+      expect(res.status).toBe(404);
+      done();
+    })
+  });
 });

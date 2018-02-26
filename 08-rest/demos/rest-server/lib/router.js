@@ -29,7 +29,11 @@ class Router {
     const url = req.url;
 
     const route = this.routes[method][url];
-    return route(req, res);
+    if (route) {
+      return route(req, res);
+    } else {
+      throw `404 Not Found: ${method} ${url}`; 
+    }
   }
 }
 

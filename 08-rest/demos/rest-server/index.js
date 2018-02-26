@@ -28,7 +28,13 @@ const server = http.createServer((req, res) => {
   try {
     router.route(req, res);
   } catch (error) {
-
+    console.log('error:', error)
+    if (error.startsWith("404")) {
+      res.writeHead(404);
+      res.write(error);
+      res.end();
+      return;
+    }
   }
 });
 

@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "uuid": "^3.2.1"
   }
 }

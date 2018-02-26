@@ -1,10 +1,10 @@
 const uuidv4 = require('uuid/v4');
 
 class BoardGame {
-  constructor(name, maxPlayers, playtime) {
+  constructor(name, players, playtime) {
     this.id = uuidv4();
     this.name = name;
-    this.maxPlayers = maxPlayers;
+    this.players = players;
     // playtime in minutes
     this.playtime = playtime;
   }

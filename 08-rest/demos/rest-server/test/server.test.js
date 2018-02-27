@@ -17,6 +17,7 @@ describe('Server', () => {
   test('/text should return with "hi"', (done) => {
     request.get(SERVER_URL + '/text')
     .end((err, res) => {
+      console.log('TEST ERROR', err)
       expect(res.status).toBe(200);
       expect(res.text).toBe('hi');
       done();

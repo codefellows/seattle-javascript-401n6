@@ -27,6 +27,9 @@ class Router {
   route(req, res) {
     const method = req.method;
     const url = req.url;
+    const path = url;
+    console.log('URL:', url);
+    console.log('PATH:', path);
 
     const route = this.routes[method][url];
     if (!route) {
@@ -37,13 +40,18 @@ class Router {
 
   tryRoute(req, res) {
     try {
-      return route(req, res);
+      return this.route(req, res);
     } catch (error) {
-      let status = error.substr(0,3)
-      let code = parseInt(status, 10);
-      if (isNaN(code) || code < 300 || code >= 499) {
-        // internal server error
-        code = 500;
+      console.log('ERROR:', error)
+      // assume the worst as 500
+      let code = 500;
+      if (error && error.code && error.code.substr) {
+        let status = error.substr(0,3)
+        code = parseInt(status, 10);
+        if (isNaN(code) || code < 300 || code >= 499) {
+          // internal server error
+          code = 500;
+        }
       }
       res.writeHead(code);
       res.write(error);

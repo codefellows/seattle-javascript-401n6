@@ -3,25 +3,14 @@ const url = require('url');
 const querystring = require('querystring');
 const Router = require('./lib/router');
 
-function text(req, res) {
-  res.writeHead(200, {
-    'Content-Type': 'text/plain'
-  });
-  res.write('hi');
-  res.end();
-}
-
-function json(req, res) {
-  res.writeHead(200, {
-    'Content-Type': 'application/json'
-  });
-  res.write(JSON.stringify({data: [1,2,3]}));
-  res.end();
-}
+const simpleAPI = require('./api/simple');
+const gamesAPI = require('./api/games');
 
 router = new Router();
-router.get('/text', text);
-router.get('/json', json);
+router.get('/text', simpleAPI.text);
+router.get('/json', simpleAPI.json);
+
+router.get('/games', gamesAPI.getAllGames);
 
 const server = http.createServer((req, res) => {
   console.log('URL:', req.url);

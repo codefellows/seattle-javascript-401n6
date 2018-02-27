@@ -2,13 +2,13 @@
   "name": "rest-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "watch": "nodemon",
     "test": "jest test"
   },

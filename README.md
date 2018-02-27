@@ -63,3 +63,7 @@ Week 16  Thursday  May   24th
 * Ronnie Lewis
 * Ryan Johnson
 * Trevor Dobson
+
+## YouTube Videos
+* [08 HTTP Lab Code Review](https://www.youtube.com/watch?v=m4AMdFvAVDc&feature=youtu.be)
+* [08 RESTful Server & Memory Storage](https://www.youtube.com/watch?v=n2o1Rm0UaOc&feature=youtu.be)

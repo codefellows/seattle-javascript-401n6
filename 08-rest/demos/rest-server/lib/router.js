@@ -29,10 +29,26 @@ class Router {
     const url = req.url;
 
     const route = this.routes[method][url];
-    if (route) {
-      return route(req, res);
-    } else {
+    if (!route) {
       throw `404 Not Found: ${method} ${url}`; 
+    }
+    route(req, res);
+  }
+
+  tryRoute(req, res) {
+    try {
+      return route(req, res);
+    } catch (error) {
+      let status = error.substr(0,3)
+      let code = parseInt(status, 10);
+      if (isNaN(code) || code < 300 || code >= 499) {
+        // internal server error
+        code = 500;
+      }
+      res.writeHead(code);
+      res.write(error);
+      res.end();
+      return;
     }
   }
 }

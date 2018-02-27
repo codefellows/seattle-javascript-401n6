@@ -25,17 +25,7 @@ router.get('/json', json);
 
 const server = http.createServer((req, res) => {
   console.log('URL:', req.url);
-  try {
-    router.route(req, res);
-  } catch (error) {
-    console.log('error:', error)
-    if (error.startsWith("404")) {
-      res.writeHead(404);
-      res.write(error);
-      res.end();
-      return;
-    }
-  }
+  return router.tryRoute(req, res);
 });
 
 const PORT = 3000 || process.env;

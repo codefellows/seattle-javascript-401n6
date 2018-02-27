@@ -19,6 +19,10 @@ const server = http.createServer((req, res) => {
   // retrieve and ?id= query parameters
   // retrieve any POST/PUT body data
   // we want to retrieve information and send good responses.
+  router.get('/api/books', );
+  router.post('/api/books');
+
+
   if (req.url === '/plaintext') {
     return replyText(res);
   } else if (req.url === '/json') {

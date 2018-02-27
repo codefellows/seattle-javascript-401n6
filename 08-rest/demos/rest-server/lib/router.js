@@ -29,6 +29,11 @@ class Router {
 
   route(req, res) {
     const method = req.method;
+
+    if (method === "PUT" || method === "POST") {
+    }
+
+
     req.url = parseUrl(req.url);
     req.url.query = parseQuery(req.url.query);
     console.log('URL:', req.url.href);

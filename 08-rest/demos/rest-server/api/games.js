@@ -20,7 +20,12 @@ function getGames(req, res) {
 }
 
 function createGame(req, res) {
-
+  let name = req.url.query.name;
+  let player = req.url.query.player;
+  let playtime = req.url.query.playtime;
+  
+  let game = storage.createGame(name, player, playtime);
+  return game;
 }
 
 function updateGame(req, res) {

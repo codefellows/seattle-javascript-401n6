@@ -11,6 +11,7 @@ router.get('/text', simpleAPI.text);
 router.get('/json', simpleAPI.json);
 
 router.get('/games', gamesAPI.getGames);
+router.post('/games', gamesAPI.createGame);
 
 const server = http.createServer((req, res) => {
   return router.tryRoute(req, res);

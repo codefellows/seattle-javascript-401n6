@@ -10,10 +10,9 @@ router = new Router();
 router.get('/text', simpleAPI.text);
 router.get('/json', simpleAPI.json);
 
-router.get('/games', gamesAPI.getAllGames);
+router.get('/games', gamesAPI.getGames);
 
 const server = http.createServer((req, res) => {
-  console.log('URL:', req.url);
   return router.tryRoute(req, res);
 });
 

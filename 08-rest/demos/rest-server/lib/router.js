@@ -1,3 +1,6 @@
+const parseUrl = require('url').parse;
+const parseQuery = require('querystring').parse;
+
 class Router {
   constructor() {
     this.routes = {
@@ -26,12 +29,13 @@ class Router {
 
   route(req, res) {
     const method = req.method;
-    const url = req.url;
-    const path = url;
-    console.log('URL:', url);
-    console.log('PATH:', path);
+    req.url = parseUrl(req.url);
+    req.url.query = parseQuery(req.url.query);
+    console.log('URL:', req.url.href);
+    console.log('QUERY:', req.url.query);
 
-    const route = this.routes[method][url];
+    let path = req.url.pathname;
+    const route = this.routes[method][path];
     if (!route) {
       throw `404 Not Found: ${method} ${url}`; 
     }
@@ -45,7 +49,7 @@ class Router {
       console.log('ERROR:', error)
       // assume the worst as 500
       let code = 500;
-      if (error && error.code && error.code.substr) {
+      if (error && error.substr) {
         let status = error.substr(0,3)
         code = parseInt(status, 10);
         if (isNaN(code) || code < 300 || code >= 499) {

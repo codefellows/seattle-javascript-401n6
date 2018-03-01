@@ -1,0 +1,7 @@
+this is a short file
+I've made it myself
+there are three lines
+or more
+who knows
+
+I wonder how it deals with empty lines

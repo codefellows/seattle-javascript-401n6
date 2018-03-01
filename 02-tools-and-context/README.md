@@ -8,13 +8,8 @@
 * Students will be able to interpret the different types of errors in Javascript
 
 ## Resources
-* Read [about package.json]
-* Skim [npm scripts as build tools]
-* Skim [npm scripts docs]
-* Read [semver](http://semver.org/)
-* Read [node error docs]
-* Read [mdn this]
-* Watch [javascript context tutorial]
+* Watch [Fun Fun Function: var, ley, const](https://www.youtube.com/watch?v=sjyJBL5fkp8)
+* Watch [Javascript Context Tutorial](https://www.youtube.com/watch?v=fjJoX9F_F5g)
 
 ## package.json
 The `package.json` file is used to describe and configure a NodeJS package. The only two fields that are required by a package.json are `name` and `version`. If a package has external dependencies, they are listed by name and version under the fields `dependencies` and `devDependencies`. If the package depends on an external package to run, the external package should be listed under `dependencies`. If the external package is only needed in development (like a testing framework), it should be listed under `devDependencies`. `package.json` files can have a `scripts` field where keys can be associated with unix commands. NPM scripts have the added benefit that they can run any command line utility (CLI) defined in a dependency, without globally installing the CLI on you operating system.
@@ -133,15 +128,3 @@ warningGet().addEventListener('click', () => {
   warningSet('the sky is falling')
 })
 ```
-
-<!--links -->
-[node error docs]: https://nodejs.org/dist/latest-v6.x/docs/api/errors.html
-[about package.json]: https://docs.npmjs.com/files/package.json
-[npm scripts as build tools]: https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/
-[npm scripts docs]: https://docs.npmjs.com/misc/scripts
-[mdn new]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
-
-[mdn object prototype]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype
-[mdn inheritance and the prototype chain]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
-[mdn this]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
-[Javascript Context Tutorial]: https://www.youtube.com/watch?v=fjJoX9F_F5g

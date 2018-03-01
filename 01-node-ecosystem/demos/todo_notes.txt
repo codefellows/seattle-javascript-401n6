@@ -1,0 +1,24 @@
+Syallbus
+Schedule
+  - coworking
+  - intense weeks
+  - project weeks
+bash_profile
+  be, br, $EDITOR, pingg
+Install tools
+  brew, npm, node
+  jest
+common bash commands
+  ls, mkdir, touch
+  rm mv cp
+Learn Stuff prepping for Lab
+  execute .js file with node
+  run tests
+  write modules
+  export modules
+  import modules
+  review for loops
+Tools + Orginization
+  Divvy
+  CMD+space (spotlight)
+Name Game

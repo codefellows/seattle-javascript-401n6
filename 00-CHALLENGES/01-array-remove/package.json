@@ -1,0 +1,12 @@
+{
+  "name": "01-array-remove",
+  "version": "1.0.0",
+  "description": "// removes an element from the array at the index // do not use any index array methods like [].splice() // [].pop [].push or anything. // you're only allowed to use a[i], and a[i] = \"foo\" // //        input: remove([32, 65, 89, 43], 0) // intermediate: [null, 65, 89, 43] //       result:[65, 89, 43] // set the index given to null // write a for loop that shifts all other values over to fill the now null space // manually adjust .length of the array to be one less ``` function remove(arr, index) {   return arr; }",
+  "main": "manual-array-remove.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

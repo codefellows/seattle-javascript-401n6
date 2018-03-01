@@ -1,15 +1,6 @@
 const fs = require('fs');
-const Book = require('../../models/book');
 
-let BOOKS = {};
 let STORAGE_DIRECTORY = __dirname + '/savedfiles';
-
-function seed() {
-  BOOKS = {};
-  save(new Book("Dune", "Frank Herbert", 900 * 120));
-  save(new Book("Harry Potter", "JK Rowling", 900 * 98));
-  save(new Book("Hitchhiker's Guide", "Douglas Adams", 42 * 42 * 42));
-}
 
 function bookIDToFilename(id) {
   return STORAGE_DIRECTORY + '/' + id + '.json';
@@ -67,4 +58,4 @@ function removeAll() {
   });
 }
 
-module.exports = {seed, save, get, getAll, remove, removeAll};
+module.exports = {save, get, getAll, remove, removeAll};

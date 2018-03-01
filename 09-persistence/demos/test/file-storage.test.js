@@ -27,16 +27,6 @@ describe("File Storage", () => {
     });
   });
 
-  it("should be able to delete a file", (done) => {
-    fileStorage.remove(book.id)
-    .then((removedBook) => {
-      expect(book.id).toEqual(removedBook.id);
-      expect(book.name).toEqual(removedBook.name);
-      expect(book.author).toEqual(removedBook.author);
-      expect(book.words).toEqual(removedBook.words);
-      done();
-    });
-  });
 
   it("should be able to edit a file", (done) => {
     book.name = "Harry Potter 2";
@@ -61,7 +51,7 @@ describe("File Storage", () => {
   });
 
   it("should be able to delete all files", (done) => {
-    fileStorage.removeAll()
+    //fileStorage.removeAll()
     .then(deletedBooks => {
       done();
     });
@@ -81,7 +71,7 @@ describe("File Storage", () => {
     ]
 
     // delete all books first to make sure it's clean.
-    fileStorage.removeAll()
+    //fileStorage.removeAll()
     .then(() => {
       let bookSaves = [
         fileStorage.save(books[0]),
@@ -105,7 +95,7 @@ describe("File Storage", () => {
       expect(savedBooks.length).toEqual(4);
     })
     .then(() => {
-      return fileStorage.removeAll();
+      //return fileStorage.removeAll();
     })
     .then(deletedBooks => {
       // pretty annoying, but we have to sort the two lists somehow.

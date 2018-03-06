@@ -1,12 +1,12 @@
+"use strict";
+
 const http = require('http');
-const url = require('url');
-const querystring = require('querystring');
 const Router = require('./lib/router');
 
 const simpleAPI = require('./api/simple');
 const gamesAPI = require('./api/games');
 
-router = new Router();
+const router = new Router();
 router.get('/text', simpleAPI.text);
 router.get('/json', simpleAPI.json);
 

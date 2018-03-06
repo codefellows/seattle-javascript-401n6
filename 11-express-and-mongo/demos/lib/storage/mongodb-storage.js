@@ -19,7 +19,7 @@ function save(book) {
 
 function get(id) {
   return new Promise((resolve, reject) => {
-    Book.find({id: id}, (err, books) => {
+    Book.findOne({_id: id}, (err, books) => {
       resolve(books);
     })
   });

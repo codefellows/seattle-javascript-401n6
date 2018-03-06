@@ -1,5 +1,3 @@
-const memory = require('./memory-storage');
-const file = require('./file-storage');
 const mongodb = require('./mongodb-storage');
 
 const Book = require('../../models/book');
@@ -17,4 +15,4 @@ function seed(storage) {
   });
 }
 
-module.exports = {file, memory, mongodb, seed};
+module.exports = {mongodb, seed};

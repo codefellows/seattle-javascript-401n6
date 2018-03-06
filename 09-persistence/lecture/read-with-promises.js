@@ -15,21 +15,23 @@ const fs = require('fs');
 //   });
 // });
 
+// readText('./ulysses.txt')
+// .then(handleFileResult)
+// .then(readText('./sherlock.txt'))
+// .then(handleFileResult)
+// .then(readText('./moby-dick.txt'))
+// .then(handleFileResult);
 readText('./ulysses.txt')
 .then(handleFileResult)
-.then(() => {
-  return readText('./sherlock.txt')
-})
+.then(readText('./sherlock.txt'))
 .then(handleFileResult)
-.then(() => {
-  return readText('./moby-dick.txt')
-})
+.then(readText('./moby-dick.txt'))
 .then(handleFileResult);
 
 // Returns a promise that resolves with a string
 // of the text in the given file.
 function readText(filename) {
-  let promise = new Promise((resolve) => {
+  return new Promise((resolve) => {
     fs.readFile('./' + filename, (err, data) => {
       resolve({
         filename: filename,
@@ -37,7 +39,6 @@ function readText(filename) {
       });
     });
   });
-  return promise;
 }
 
 function handleFileResult(result) {
@@ -45,4 +46,10 @@ function handleFileResult(result) {
   let data = result.text;
   let words = data.split(" ");
   console.log("WORDS:", words.length, "in", filename);
+}
+
+function promisify(func) {
+  new Promise((resolve, reject) => {
+    resolve(func());
+  })
 }

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "mongoose": "^5.0.9",
     "superagent": "^3.8.2",
     "uuid": "^3.2.1"

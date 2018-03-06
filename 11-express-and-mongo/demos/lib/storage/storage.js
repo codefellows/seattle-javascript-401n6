@@ -8,9 +8,9 @@ function seed(storage) {
   return storage.removeAll()
   .then(() => {
     return Promise.all([
-      storage.save(new Book("Dune", "Frank Herbert", 900 * 120)),
-      storage.save(new Book("Harry Potter", "JK Rowling", 900 * 98)),
-      storage.save(new Book("Hitchhiker's Guide", "Douglas Adams", 42 * 42 * 42))
+      storage.save(new Book({name: "Dune", author: "Frank Herbert", words: 900 * 120})),
+      storage.save(new Book({name: "Harry Potter", author: "JK Rowling", words: 900 * 98})),
+      storage.save(new Book({name: "Hitchhiker's Guide", author: "Douglas Adams", words: 42 * 42 * 42}))
     ])
   });
 }

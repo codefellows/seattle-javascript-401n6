@@ -1,14 +1,10 @@
-const uuid = require('uuid/v4');
+const mongoose = require('mongoose');
 
-class Book {
-  constructor(name, author, words) {
-    // the id is generated when a new Book is created
-    // the id is NOT supplied by the user.
-    this.id = uuid();
-    this.name = name;
-    this.author = author;
-    this.words = words;
-  }
-}
+const bookSchema = new mongoose.Schema({
+  name: String,
+  author: String,
+  words: Number,
+})
 
-module.exports = Book;
+const Book = mongoose.model('Book', bookSchema);
+module.exports = Book

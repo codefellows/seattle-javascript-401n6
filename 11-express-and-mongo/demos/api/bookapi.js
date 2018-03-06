@@ -38,6 +38,8 @@ router.put('/', (req, res) => {
   let id = req.query.id;
   storage.get(id)
   .then(book => {
+    // Allow users to only send the properties they want to update
+    // Only update a property if someone passed it.
     if (req.body.name) {
       book.name = req.body.name;
     }

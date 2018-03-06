@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-const Book = require('../../models/book-mongodb');
+const Book = require('../../models/book');
 
 function save(book) {
   let bookModel = new Book({

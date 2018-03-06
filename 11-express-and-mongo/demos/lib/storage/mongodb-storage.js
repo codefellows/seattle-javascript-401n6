@@ -35,9 +35,9 @@ function getAll() {
 
 // watch out! 'delete' is a keyword in JavaScript. Get creative.
 function remove(id) {
-  return new Promise({id: id}, (resolve, reject) => {
-    Book.remove((err, books) => {
-      resolve(books);
+  return new Promise((resolve, reject) => {
+    Book.remove({_id: id}, (err, book) => {
+      resolve(book);
     })
   });
 }

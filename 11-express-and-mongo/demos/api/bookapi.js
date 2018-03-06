@@ -34,4 +34,32 @@ router.post('/', (req, res) => {
   });
 })
 
+router.put('/', (req, res) => {
+  let id = req.query.id;
+  storage.get(id)
+  .then(book => {
+    if (req.body.name) {
+      book.name = req.body.name;
+    }
+    if (req.body.author) {
+      book.author = req.body.author;
+    }
+    if (req.body.words) {
+      book.words = req.body.words;
+    }
+
+    book.save((err, book) => {
+      res.send(book);
+    })
+  });
+});
+
+router.delete('/', (req, res) => {
+  let id = req.query.id;
+  storage.remove(id)
+  .then(book => {
+    res.send(book);
+  });
+});
+
 module.exports = router;

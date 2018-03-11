@@ -13,6 +13,21 @@ const rootRoutes = require('./routes/root');
 const cityRoutes = require('./routes/city');
 const beerRoutes = require('./routes/beer');
 
+app.use(function (req, res, next) {
+  console.log("Before req had timestamp:", req.timestamp);
+  next();
+});
+
+app.use(function (req, res, next) {
+  req.timestamp = new Date();
+  next();
+});
+
+app.use(function (req, res, next) {
+  console.log("After req had timestamp:", req.timestamp);
+  next();
+});
+
 // Attach the body parser to pick JSON off
 // the HTTP body of incoming requests
 app.use(bodyParser.json());

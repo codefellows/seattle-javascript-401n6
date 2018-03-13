@@ -11,7 +11,7 @@
 ## Review RESTful sotrage labs
 
 
-## Review Whiteboard challange
+## Review Whiteboard challenge
 Common mistakes:
 
 * trying to access `.size` or `.length` -- sorry, you don't have this on
@@ -38,6 +38,8 @@ Thank you Alicia, Trevor and Amber for participating early, Brandon,
 * **document** - a JSON-like object that stores properties and has an \_id
 * **collection** - a group of documents, generally all with similar structures
 * **database** - a group of collections
+
+database -> collections -> documents -> (sub-documents)
 
 ### Mongoose Terms
 * **Schema** - the blueprint for a document. defines properties and their

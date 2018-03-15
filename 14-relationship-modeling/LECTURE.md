@@ -1,5 +1,5 @@
 # Class 14: Modelling Relationships
-* [ ] Lightning Talk: Ix on Web Scrapers
+* [X] Lightning Talk: Ix on Web Scrapers
 * [ ] Review Mongoose Schemas, Models
 * [ ] Review Mongoose Sub-Documents, Validation, adding methods
 * [ ] Parse a file to create Artists

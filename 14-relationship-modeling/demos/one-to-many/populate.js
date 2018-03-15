@@ -13,6 +13,8 @@ fs.readFile(DATAFILE, (err, data) => {
   const lines = data.toString().split('\n');
   console.log('LINES:', lines.length);
 
+  const savedArtists = {};
+
   Artist.remove()
   .then(() => {
     Song.remove()
@@ -37,7 +39,10 @@ fs.readFile(DATAFILE, (err, data) => {
         .then(savedArtist => {
           if (!savedArtist) {
             console.log('Creating artist:', artist);
-            return artist.save();
+            if (!savedArtists[artist]) {
+              savedArtists[artist] = true;
+              return artist.save();
+            }
           }
           return savedArtist;
         })

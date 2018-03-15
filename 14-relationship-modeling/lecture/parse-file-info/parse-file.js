@@ -21,7 +21,8 @@ fs.readFile(FILEPATH, (err, data) => {
     let cells = line.split(',');
 
     if (cells.length !== 3) {
-      console.log('Error: bad input:', cells);
+      console.log('Error: bad input:', line);
+      continue;
     }
 
     // Step 3: ['artist name', 'song name', '1234']
@@ -38,11 +39,6 @@ fs.readFile(FILEPATH, (err, data) => {
       most = tally[artistName];
       mostKey = artistName;
     }
-
-    console.log('Artist:', artistName);
-    console.log('  Song:', songName);
-    console.log('Length:', duration);
-    console.log();
   }
 
   console.log('Most played artist:', mostKey, 'with', most, 'plays');

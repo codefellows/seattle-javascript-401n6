@@ -1,6 +1,9 @@
 const express = require('express');
 const Router = express.Router();
 
+const Artist = require('../models/artist');
+const Song = require('../models/song');
+
 Router.get('/', (req, res) => {
   let id = req.query.id;
   if (id) {
@@ -9,7 +12,7 @@ Router.get('/', (req, res) => {
     // get all
   }
   console.log('GET queryparams', req.query);
-  res.send('GET response');
+  //res.send('GET response');
 });
 
 Router.delete('/', (req, res) => {

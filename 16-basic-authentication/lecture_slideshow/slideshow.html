@@ -85,9 +85,25 @@ The specification says to take the username `Aladdin` and the password
 `OpenSesame` and put them together with a colon, like `Aladdin:OpenSesame`
 then it runs that string through Base64 encoding.
 
+---
+# Base-64 Encoding
+
 Base64 encoding is a common encoding. It is easy to encode and decode information.
 Encoding usernames and passwords with Base64 does not protect any secrets. It only
 makes for a good standard for the specification.
+
+* [Wikipedia Base64 Encoding](https://en.wikipedia.org/wiki/Base64)
+
+JavaScript has two Base64 encode and decode methods built into the language:
+
+```js
+let username = 'Aladdin';
+let password = 'OpenSesame';
+let userInfo = username + ':' + password;
+
+let encoded = btoa(userInfo);
+let decoded = atob(encoded);
+```
 
 ---
 # Accessing the Authorization Header
@@ -184,6 +200,45 @@ User.checkPassword = function(attempt) {
 * Use bcrypt to compare the password they just send with the stored
   hashed password
 * Return and send `200` or `400` status codes as appropriate.
+
+---
+# Check for Understanding
+## What's the difference between a hash and a cipher?
+
+---
+# Check for Understanding
+## What's the difference between a hash and a cipher?
+
+- A hash is irreversible.
+- A hash is used to verify data-consistency.
+
+* A cipher is reversible.
+* A cipher can be encoded and decoded.
+* It should be hard to reverse data encoded with a cipher.
+
+---
+# Check for Understanding
+## What's the best cipher algorithm in the world?
+
+---
+# Check for Understanding
+## What's the best cipher algorithm in the world?
+
+- Whichever one you didn't write.
+- There are multiple good implementations.
+- Some have been proven non-useful over time
+  - cyptographic researchers discovered fundamental flaws
+  - governments put in backdoors
+
+Bruce Schneier is a popular, credible security researcher. Read his blog
+if you want to inform yourself more about what happens in the security world.
+
+* [The SHAppening](https://en.wikipedia.org/wiki/SHA-1#The_SHAppening)
+* [Bruce Schneir: Can the NSA break AES?](https://www.schneier.com/blog/archives/2012/03/can_the_nsa_bre.html)
+* [Bruce Schneir: Refuse to be Terrorized](https://www.schneier.com/essays/archives/2006/08/refuse_to_be_terrori.html)
+* [Bruce Schneir: In Praise of Security Theater](https://www.schneier.com/essays/archives/2007/01/in_praise_of_securit.html)
+
+
 
 
     </textarea>

@@ -1,20 +1,18 @@
 /* All in one file (and very basic) demo
 of Mongoose populate functionality */
-
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 
 const app = express();
-
-mongoose.connect('mongodb://localhost:27017/football-teams');
-
 app.use(bodyParser.json());
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/football-teams');
+
 // Player models
-const playerSchema = Schema({
+const playerSchema = new mongoose.Schema({
     team: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Team'
     },
     name: String
@@ -23,17 +21,16 @@ const playerSchema = Schema({
 const Player = mongoose.model('Player', playerSchema);
 
 // Team model
-const teamSchema = Schema({
+const teamSchema = new mongoose.Schema({
     city: String,
     mascot: String,
-    players: [{ type: Schema.Types.ObjectId, ref: 'Player' }]
-  });
-  
-  const Team = mongoose.model('Team', teamSchema);
+    players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
+});
+
+const Team = mongoose.model('Team', teamSchema);
 
 // Team routes
 app.get('/teams', (req, res) => {
-
     if (req.query.id) {
         Team
             .find({
@@ -45,13 +42,11 @@ app.get('/teams', (req, res) => {
                 res.send(teams[0]);
             })
     } else {
-
         Team.find().populate('players').exec().then(teams => res.send(teams));
     }
 });
 
 app.post('/teams', (req, res) => {
-
     Team.create({
         city: req.body.city,
         mascot: req.body.mascot
@@ -77,7 +72,6 @@ app.put('/teams', (req, res) => {
         city: req.body.city,
         mascot: req.body.mascot
     }).then(team => {
-
         res.send(team);
     });
 });
@@ -89,13 +83,11 @@ app.delete('/teams', (req, res) => {
 
 // Player routes
 app.get('/players', (req, res) => {
-
     Player.find().populate('team').
     exec(function (err, player) {
         if (err) return res.send('ouch')
         res.send(player);
     });
-
 });
 
 app.delete('/players', (req, res) => {

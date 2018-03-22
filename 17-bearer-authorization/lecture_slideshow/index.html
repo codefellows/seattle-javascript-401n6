@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Basic Authorization</title>
+    <title>17 Bearer Authorization</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -186,24 +186,6 @@ HMACSHA256(
 ```
 
 ---
-# Access Control
-Now that we have users and secure authentication mechanisms on our servers
-we want to use them.
-
-Think of a service like Twitter.
-
-* People post tweets.
-* People can read other people's tweets.
-* People can delete their own tweets.
-* People aren't allowed to delete other people's tweets.
-
-`Access Control` defines what information users are allowed to access
-and manipulate.
-
-We can use JSON Web Tokens to define what sort of data users are allowed
-to access and manipulate.
-
----
 # Code: How to Sign JWT Tokens
 
 ```js
@@ -272,6 +254,28 @@ console.log('PORT:', process.env.PORT);
 console.log('SECRET:', process.env.SECRET);
 console.log('MONGODB_URI:', process.env.MONGODB_URI);
 ```
+
+---
+# Access Control
+Now that we have users and secure authentication mechanisms on our servers
+we want to use them.
+
+Think of a service like Twitter.
+
+* People post tweets.
+* People can read other people's tweets.
+* People can delete their own tweets.
+* People aren't allowed to delete other people's tweets.
+
+`Access Control` defines what information users are allowed to access
+and manipulate.
+
+We can use JSON Web Tokens to define what sort of data users are allowed
+to access and manipulate.
+
+When someone requests to get all of a certain resource we can return only
+resources that they've created themselves, or are specifically allowed to
+access.
 
 ---
 # Check for Understanding

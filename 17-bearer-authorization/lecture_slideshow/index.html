@@ -193,7 +193,7 @@ require('dotenv').config();  // import dotenv package for process.env access
 const jwt = require('jwt');  // import the jwt package
 
 let data = {username: 'mayor', isAdmin: true};
-let token = jwt.sign(data, process.env.APP_SECRET);
+let token = jwt.sign(data, process.env.SECRET);
 ```
 
 ---
@@ -210,7 +210,7 @@ function(req, res, next) {
   var authHeader = req.headers.authorization;
   var token = authHeader.split('Bearer ')[1];
 
-  jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
     User.findOne({ username: decoded.username })
     .then(user => {
       req.user = user;
@@ -233,6 +233,16 @@ function(req, res, next) {
 
 We'll see ourselves add more sensitive information to `.env` files in the
 future when we begin deploying our servers publically.
+
+(**NOTE:** properties on `process.env` can also be defined inside your bash
+environment, but we'll just be using the `.env` file.)
+
+Run this if you want to stare into the sun and see all the properties attached
+to `.env`:
+
+```js
+console.log(process.env)
+```
 
 ---
 # .env Configuration and Access

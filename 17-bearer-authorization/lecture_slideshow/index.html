@@ -25,8 +25,6 @@
   </head>
   <body>
     <textarea id="source">
-
-
 # Class 17 Bearer Authorization with JSON Web Tokens
 
 ## Objectives
@@ -190,10 +188,10 @@ HMACSHA256(
 
 ```js
 require('dotenv').config();  // import dotenv package for process.env access
-const jwt = require('jwt');  // import the jwt package
+const jwt = require('jsonwebtoken');  // import the jwt package
 
-let data = {username: 'mayor', isAdmin: true};
-let token = jwt.sign(data, process.env.SECRET);
+let payload = {username: 'mayor', isAdmin: true};
+let token = jwt.sign(payload, process.env.SECRET);
 ```
 
 ---
@@ -247,10 +245,17 @@ console.log(process.env)
 ---
 # .env Configuration and Access
 
+**.env**
 ```env
 PORT=3000
 SECRET=moon
 MONGODB_URI=mongodb://localhost/17-bearer-auth
+```
+
+**.gitignore**
+```gitignore
+node_modules
+.env
 ```
 
 Now you can access any of these properties by requiring and configuring the

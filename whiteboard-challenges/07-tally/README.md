@@ -21,3 +21,5 @@ let phrase = 'the the the crow flew higher and higher';
 let mostFrequentWord = tally(phrase, ['the']);
 ```
 
+`mostFrequentWord` in this example should be `"higher"` because
+it appeared twice and the three `"the"` words were ignored.

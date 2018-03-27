@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>17 Bearer Authorization</title>
+    <title>18 Uploading Fliles to Amazon Simple Storage Service S3</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -25,300 +25,231 @@
   </head>
   <body>
     <textarea id="source">
-# Class 17 Bearer Authorization with JSON Web Tokens
+# ![CF](http://i.imgur.com/7v5ASc8.png) 18 Uploading Fliles to Amazon S3 (Simple Storage Service)
 
 ## Objectives
-* Students will be able to create a Bearer Authentication parser
-* Students will learn to implement Access Controls in their HTTP server routes
+* Students will create an HTML form to upload files
+* Students will configure a server to accept file uploads
+* Students will store uploaded files using Amazon's S3 Simple Storage Service
 
 ---
-# Venue Analogy
-* Imagine you're attending a show.
-* When you arrive to the show you tell the door person the performer has
-  put your name on a list.
-* The door person looks at their list, and finds your name
-* The door person looks at your ID to prove your name
-* The door person lets you in
 
-Later on you step outside, and then try to reenter the venue. 
+# Sending an HTML File
+Create some basic project infrastructure. Edit the `index.html` file yourself
+to make a simple homepage.
 
-* The door person doesn't recognize you. (They never do)
-* You tell them you're on the list.
-* They check their list agian, find your name and let you in.
-
-You leave and re-enter several more times. The door person keeps
-forgetting you and they must keep checking their list. Everyone's
-tired of checking the list.
-
-Their must be a better way!
-
----
-# A Better Venue
-Another day you come back to the venue and find out a new manager has upgraded
-their door policies. They have a new system in place which they've found to be
-quite efficient.
-
-* You arrive to a show where a perfomer has put you on a list.
-* You tell the door person your name.
-* The door person finds your name on their list.
-* You show them your id to prove you're you.
-
-Here's where things change!
-
-* This time you get a bracelet!
-* The door person says you can show them your bracelet and they'll know
-  you've already been authorized to come in the venue.
-
-You go in and out of the venue all night. Instead of giving your name
-and checking their list you walk through the door much more quickly
-because you simply have to show the door person the bracelet you're
-wearing.
-
----
-# Venue Analogy Explained
-* Having your name on a list is like having your user information stored
-  in a database.
-* Providing your name and checking the list is like `Basic` authorization
-  where you provide your username and password on every request.
-
-What we'll see in today's lesson is that it's possible for the server to
-give users a `Token` that they can use later to prove that they've already
-been approved from the list.
-
-`JSON Web Tokens` are passed through HTTP headers. The token contains information
-about who a user is, what a user is allowed to do, and they contain a special
-signature that proves the token came from the server.
-
----
-# Bearer Authorization
-Previously we looked at `Basic Authorization`. It sent a username and a password
-to the server inserted as a header. The header looked like this:
-
-```http
-Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+```bash
+npminit -y
+mkdir static
+touch index.js
+touch index.html
 ```
 
-* Bearer authorization still uses the `Authorization` header
-* It replaces the word `Basic` with `Bearer`
-* It sends a `<token>` which we'll see contains much more data
-  than simply a user name and password
-
-```http
-Authorization: Bearer <token>
-```
-
----
-# JSON Web Token Structure
-A JSON web token is a Base-64-encoded string. It contains three different
-sections of data, all concatenated together with a `.` dot.
-
-There are `Header`, `Payload`, and `Signature` sections.
-
-All together they might look this like:
-
-![JSON web token](./token.png)
-
----
-# Analyzing Token Structure
-Go to [jwt.io](http://jwt.io) to use their excellent tool for analyzing the
-contents of a JSON Web Token.
-
-![JWT.io tool](./jwt-tool.png)
-
----
-# The Header
-
-```json
-{
-  "alg": "HS256",
-  "typ": "JWT"
-}
-```
-
-The header is a small JSON object that contains information about how
-the JSON Web Token was created.
-
-This header says that the algorithm `alg` used to encrypt the JSON Web
-Token is called `HS256`.
-
----
-# The Payload
-
-```json
-{
-  "exp": "Sunday, September 13, 2020 12:26:40 PM GMT",
-  "username": "mayor@seattle.gov",
-  "admin": true
-}
-```
-
-The payload contains meta-data and information about the user.
-
-This payload says three things:
-* The entire token expires ("exp") at a certain time
-* This token represents someone with the username
-* The user with this token is an administrator
-
-Strict formats of JSON Web Tokens define "claims" about users with all sorts
-of formal definitions. In this course we will simply not treat the payload
-so formally.
-
-One example of a formal property in the payload would be the `"exp"` property
-which represents when a JSON webtoken will expire.
-
----
-# The Signature
-* The signature helps verify the integrity of the data inside the header
-and the payload.
-* The signature prevents users from rewriting their tokens
-* For example, If the signature weren't present someone could change the
-  `admin` property from `true` to `false`
-
-`HMACSHA256` here represents one of many possible encryption algorithms.
+Configure the server to return the HTML page.
 
 ```js
-HMACSHA256(
-  base64UrlEncode(header) + "." +
-  base64UrlEncode(payload),
-  secret)
+const express = require('express');
+const app = express();
+app.use(express.static('static'));
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html');
+});
+```
+---
+
+# Build an HTML Form for File Upload
+
+```html
+<form action="/photos/upload" method="POST" enctype="multipart/form-data">
+  <input type="file" name="picture" />
+  <input type="submit" />
+</form>
+```
+
+* `action` - defines what route on the server the form will submit to
+* `method` - defines what HTTP method the request will use
+* `enctype` - configures the form to upload all it's information in
+  "multipart" format which will allow files to be sent.
+* Use `type="file"` to configure an input to trigger a file-select window.
+
+---
+# File Upload Route
+* [multer Documentation](https://github.com/expressjs/multer)
+
+This route uses `multer` middleware. It's configured to look for form
+data named `picture`. It will gather the file data and save it to the
+destinationed folder configured as `uploads/`.
+
+```js
+const express = require('express');
+const router = new express.Router();
+
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+router.post('/upload', upload.single('picture'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  res.send(req.file);
+});
+
+module.exports = router;
 ```
 
 ---
-# Code: How to Sign JWT Tokens
+# AWS .env Variables
+```env
+AWS_BUCKET='your bucket name'
+AWS_ACCESS_KEY_ID='your aws key'
+AWS_SECRET_ACCESS_KEY='your secret aws key'
+```
+
+* Navigate to AWS and sign in
+* Click on your username in the uppser right and select [My Security Credentials](https://console.aws.amazon.com/iam/home#/security_credential)
+* Expand the `Access Keys` section
+* Click `Create New Access Key`
+* Toggle `Show Access Key`
+* Copy `Access Key ID:` to your .env
+* Copy `Secret Access Key:` to your .env
+* Fill in the name of whatever bucket you're using
+
+**Note:** When you navigate to My Security Credentials you may see a message
+encouraging you to "Get Started with IAM Users." Simply ignore it and choose 
+"Continue to Security Credentials."
+
+---
+# Configuring AWS
+
+Make sure you call `require('dotenv').config()` in your main server file
+so everything in your `.env` file gets attached to `process.env`.
 
 ```js
-require('dotenv').config();  // import dotenv package for process.env access
-const jwt = require('jsonwebtoken');  // import the jwt package
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 
-let payload = {username: 'mayor', isAdmin: true};
-let token = jwt.sign(payload, process.env.SECRET);
+const path = require('path');
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+router.post('/upload', upload.single('picture'), function (req, res, next) {
+  let ext = path.extname(req.file.originalname);
+  let params = {
+    ACL: 'public-read',
+    Bucket: process.env.AWS_BUCKET,
+    Key: `${req.file.filename}${ext}`,
+    Body: fs.createReadStream(req.file.path)
+  }
+
+  s3.upload(params, (err, s3Data) => {
+    res.send(s3Data);
+  });
+});
+```
+---
+# Saving S3 Data to the database
+Save S3 responses as documents in MongoDB to keep track of everything
+we've uploaded.
+
+```js
+s3.upload(params, (err, s3Data) => {
+  new Photo({
+    url: s3Data.Location
+  })
+  .save()
+  .then(photo => {
+    res.send(photo);
+  });
+});
 ```
 
 ---
-# Code: How to Verify JWT Tokens
+# Testing File Uploads
+`superagent` has a method called `.attach()` that allows us to attach
+a file to a server request.
 
-Create a piece of middleware you can use to verify the JSON Web Token
-and attach user information to the `req` request object so it's available in
-other routes.
-
-**lib/bearer-auth-middleware.js**
 ```js
-function(req, res, next) {
-  // read the user information from the "Authorization" header.
-  var authHeader = req.headers.authorization;
-  var token = authHeader.split('Bearer ')[1];
+require('dotenv').config();
+const request = require('superagent');
 
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    User.findOne({ username: decoded.username })
-    .then(user => {
-      req.user = user;
+describe('S3 Uploads', () => {
+  it('should be able to upload images', (done) => {
+    let imageLocation = './data/photo1.png';
+    let uploadUrl = 'http://localhost:3000/photos/upload';
 
-      // go to the next piece of middleware
-      next();
+    request.post(uploadUrl)
+    .attach('picture', imageLocation)
+    .end((err, res) => {
+      let amazonUrl = process.env.AWS_BUCKET + '.s3.amazonaws.com';
+      let isAmazonUrl = res.body.url.includes(amazonUrl);
+      expect(isAmazonUrl).toBe(true);
+
+      done();
     });
   });
-}
+});
 ```
 
 ---
-# The .env File
-* We're beginning to have small pieces of configuration that exist in our code.
-* It's nice to gather these all together and put them in once place.
-* We can configure our servers to read configurations from a special `.env`
-  file.
-* `.env` files can contain confidential information so it's a good idea to
-  add the `.env` to your `.gitignore`
+# Common superagent Mistake
+Make sure you give the `.attach()` method the proper name of the form
+field where the server expects to see the image data. Here my server
+expects forms to have the file input be named `picture`:
 
-We'll see ourselves add more sensitive information to `.env` files in the
-future when we begin deploying our servers publically.
+**index.html**
+```html
+<input type="file" name="picture" />
+```
 
-(**NOTE:** properties on `process.env` can also be defined inside your bash
-environment, but we'll just be using the `.env` file.)
-
-Run this if you want to stare into the sun and see all the properties attached
-to `.env`:
-
+**index.js**
 ```js
-console.log(process.env)
+router.post('/upload', upload.single('picture'), function (req, res, next) {
+
+});
 ```
 
----
-# .env Configuration and Access
-
-**.env**
-```env
-PORT=3000
-SECRET=moon
-MONGODB_URI=mongodb://localhost/17-bearer-auth
-```
-
-**.gitignore**
-```gitignore
-node_modules
-.env
-```
-
-Now you can access any of these properties by requiring and configuring the
-`dotenv` package and accessing these properties off a special `process.env`
-variable.
-
+**upload.test.js**
 ```js
-require('dotenv').config();  // import dotenv package for process.env access
-
-console.log('PORT:', process.env.PORT);
-console.log('SECRET:', process.env.SECRET);
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
-```
-
----
-# Access Control
-Now that we have users and secure authentication mechanisms on our servers
-we want to use them.
-
-Think of a service like Twitter.
-
-* People post tweets.
-* People can read other people's tweets.
-* People can delete their own tweets.
-* People aren't allowed to delete other people's tweets.
-
-`Access Control` defines what information users are allowed to access
-and manipulate.
-
-We can use JSON Web Tokens to define what sort of data users are allowed
-to access and manipulate.
-
-When someone requests to get all of a certain resource we can return only
-resources that they've created themselves, or are specifically allowed to
-access.
-
----
-# Check for Understanding
-## What's the name of the header used for both `Basic` and `Bearer` authorization?
-
----
-# Check for Understanding
-## What's the name of the header used for both `Basic` and `Bearer` authorization?
-
-`Authorization`. The format for each specification looks like this:
-
-```http
-Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
-```
-
-```http
-Authorization: Bearer <token>
+request.post(uploadUrl)
+.attach('picture', imageLocation)
 ```
 
 ---
 # Check for Understanding
-## What is the role of the Signature in a token?
+## Why do we save S3 responses to the database?
 
 ---
 # Check for Understanding
-## What is the role of the Signature in a token?
-The signature prevents users from tampering with the rest of the data in
-the JSON Web Token.
+## Why do we save S3 responses to the database?
+Storing the responses in our database allows us to query for everything
+we've uploaded, and associate file uploads with any other information we
+want to save.
+
+---
+# Check for Understanding
+## How can we associate file uploads with users?
+
+---
+# Check for Understanding
+## How can we associate file uploads with users?
+
+Build database relationships between a `User` model and your uploaded
+resource model just like you did in Lab 17!
+
+Use Auth middlewear to have users signup, log in, and to be able to
+identify them on every request.
+
+Add a `userId` property to the uploaded resources you're saving!
+
+---
+# Check for Understanding
+## What can we upload to S3?
+
+---
+# Check for Understanding
+## What can we upload to S3?
+
+Pretty much anything!
 
     </textarea>
     <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->

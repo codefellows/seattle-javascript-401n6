@@ -4,7 +4,8 @@
 * Instructor: Steve Geluso
 * Assistant Instructor: JB Tellez
 * Teaching Assistant: Michael Treat
-* Teaching Assistant: Pending
+* Teaching Assistant: Christina Thomas
+* Teaching Assistant: Jeff Kusowski
 
 ## Official Course Links
 * [Course Lecture Repo](https://github.com/codefellows/seattle-javascript-401n6)

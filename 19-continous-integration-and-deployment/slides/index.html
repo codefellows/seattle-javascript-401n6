@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>18 Uploading Fliles to Amazon Simple Storage Service S3</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-inline-code {
+        color: rgb(66, 134, 244);
+      }
+
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+# ![CF](http://i.imgur.com/7v5ASc8.png) 19 Continuous Integration and Continuous Deployment (CI/CD)
+
+## Objectives
+* Students will learn about continuous integration and continuous delivery
+* Students will be able to configure TravisCI to run their tests on all pushes to GitHub
+* Students will be able to deploy their application on Heroku with a continuous delivery pipeline
+
+---
+# Continuous Integration
+Continuous Integration (CI) is the process of regularly merging individually
+developed features of code into a shared repository as frequently as they are
+made. In the most basic setup, a team could simply use git to merge code into
+a master branch. However more advanced CI patterns can be developed. These
+patterns can automate static analysis (lining), running unit and integration
+tests, testing platform support, enforcing code reviews, and much more.
+
+---
+# Continuous Deployment
+Continuous Delivery (CD) is the process of deploying software in short cycles,
+by ensuring that software can be deployed at any time. CD pairs very will with
+advanced CI setups that help ensure the core product is always a stable code
+base.
+
+---
+# Travis CI
+Travis CI is a hosted and distributed continuous integration service (CI) that
+is most often used to build and test software projects hosted on GitHub.
+
+---
+# .travis.yml 
+Travis CI is configured by adding a file named `.travis.yml` to the root
+directory of the repository. This file specifies the programming language used,
+the desired building and testing environment and various other parameters.
+
+Example **.travis.yml**
+```yml
+language: node_js
+node_js:
+  - 'stable'
+services:
+  - mongodb
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+env:
+  - CXX=g++-4.8
+sudo: required
+before_script: npm i
+script:
+  - npm test
+  - npm run lint
+```
+
+---
+# Steps to Configure Travis CI
+
+    </textarea>
+    <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->
+    <script src="file:///Users/moonmayor/Third/remark/out/remark.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+    <!-- <script src="http://5tephen.com/js/remarkable.js"></script> -->
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "basic-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jest": "^22.4.3",
+    "mongoose": "^5.0.11",
+    "superagent": "^3.8.2"
+  }
+}

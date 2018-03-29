@@ -3,8 +3,11 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
+// connect MongoDB to MLabs after simpler proven deployment
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MONGODB_URI);
+const USERNAME = 'admin';
+const PASSWORD = 'opensesame';
 
 app.get('/', (req, res) => {
   res.send('Welcome! Try to access <a href="/secret">/secret</a> to see a secret recipe!');
@@ -22,12 +25,16 @@ app.get('/secret', (req, res) => {
   let payload = authHeader.split('Basic ')[1];
   let decoded = Buffer.from(payload, 'base64').toString();
   let [username, password] = decoded.split(':');
-  console.log('credentials:', username, password);
 
-  res.send('Secret Recipe.');
+  console.log('username/password:', username, password);
+  if (username === USERNAME && password === PASSWORD) {
+    res.send('Secret Recipe.');
+  } else {
+    res.send('Incorrect username or password.');
+  }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log('http://localhost:' + PORT);
 });

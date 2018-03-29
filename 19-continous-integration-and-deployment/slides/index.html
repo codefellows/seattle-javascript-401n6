@@ -27,6 +27,31 @@
     <textarea id="source">
 # ![CF](http://i.imgur.com/7v5ASc8.png) 19 Continuous Integration and Continuous Deployment (CI/CD)
 
+## How does code get to the cloud?
+---
+# ![CF](http://i.imgur.com/7v5ASc8.png) 19 Continuous Integration and Continuous Deployment (CI/CD)
+
+## How does code get to the cloud?
+Tonight we'll see how to deploy our applications to servers where anyone can
+access them through the Internet!
+
+---
+# ![CF](http://i.imgur.com/7v5ASc8.png) 19 Continuous Integration and Continuous Deployment (CI/CD)
+## How does code get to the cloud?
+Tonight we'll see how to deploy our applications to servers where anyone can
+access them through the Internet!
+
+## How does the internet work?
+---
+# ![CF](http://i.imgur.com/7v5ASc8.png) 19 Continuous Integration and Continuous Deployment (CI/CD)
+## How does code get to the cloud?
+Tonight we'll see how to deploy our applications to servers where anyone can
+access them through the Internet!
+
+## How does the internet work?
+Tell me what to draw. Let's diagram it.
+---
+# ![CF](http://i.imgur.com/7v5ASc8.png) 19 Continuous Integration and Continuous Deployment (CI/CD)
 ## Objectives
 * Students will learn about continuous integration and continuous delivery
 * Students will be able to configure TravisCI to run their tests on all pushes to GitHub
@@ -54,12 +79,27 @@ Travis CI is a hosted and distributed continuous integration service (CI) that
 is most often used to build and test software projects hosted on GitHub.
 
 ---
-# .travis.yml 
+# Bare Bones .travis.yml 
 Travis CI is configured by adding a file named `.travis.yml` to the root
 directory of the repository. This file specifies the programming language used,
 the desired building and testing environment and various other parameters.
 
 Example **.travis.yml**
+```yml
+language: node_js
+node_js:
+  - 'stable'
+before_script: npm i
+script:
+  - npm test
+```
+
+---
+# Complicated .travis.yml
+Some dependencies might require more and more configurations. Here's an example
+of a more robust `.travis.yml`. Try starting with a simple `.travis.yml` file
+and seeing what dependencies require additional configuration.
+
 ```yml
 language: node_js
 node_js:
@@ -79,11 +119,115 @@ sudo: required
 before_script: npm i
 script:
   - npm test
-  - npm run lint
 ```
 
 ---
 # Steps to Configure Travis CI
+* Navigate to https://travis-ci.org/
+* Sign in / sign up
+* Add a new repository
+* Connect your GitHub account and press `Sync Account`
+* Filter the repositories until you see the one you want.
+* Click on the toggle so it changes from an `X` to a checkmark.
+* Click on the repo name to see the build status
+
+---
+# Configure GitHub for Travis CI
+* Navigate to GitHub page for the repo you want to configure
+* Go to the `Settings` tab
+* Choose `Integration and Services`
+* You might see `Travis CI` already listed
+  * If not, choose `Add Service` and find it
+* Click on `Travis CI` to edit it
+
+---
+# Protecting Branches
+* Navigate to GitHub page for the repo you want to configure
+* Go to the `Settings` tab
+* Choose `Branches`
+* Under `Protected Branches` choose the branch you want to protect (`master`)
+* Check `Protect this branch`
+* Check `Require status checks to pass before merging`
+* Check `continuous-integration/travis-ci`
+
+Now no one can marge code back into master unless the Travis CI tests pass.
+
+---
+# Install Heroku Command Line Interface
+
+Download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+to get access to Heroku tooling in your terminal.
+
+**OSX:**
+```bash
+brew install heroku/brew/heroku
+```
+
+**Ubuntu:**
+```bash
+wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+```
+
+**Windows:** visit the download page linked above
+
+Test to see if it's installed by running `heroku` in the terminal
+
+```bash
+heroku
+```
+
+---
+# Steps to Deploy to Heroku
+
+* Navigate to http://heroku.com
+* Sign In / Sign Up
+* Choose New, Create new app
+* Enter a globally-unique app name
+* Set Deployment method to `Connect to GitHub`
+* Search for a repo, click `Connect`
+* Configure automatic deploy to happen from the `master` branch
+* Check `Wait for CI to pass`
+* Click `Enable Automatic Deploys`
+* Click `Deploy Branch` in the manual deploy section to see things get started!
+* Once it's deployed click the `View` button to see the app in action!
+
+---
+# Debugging Heroku Deployment
+
+When you try to view your page you might see a big error page.
+Heroku allows you to view the logs via the `heroku` command line tool.
+
+```bash
+heroku apps
+heroku logs --app [[app_name]]
+```
+
+* Run `heroku apps` to see a list of all your apps
+* Run `heroku logs --app [[app_name]]` to view logs for 
+
+![heroku logs](./images/heroku_logs.png)
+
+---
+# Common Heroku Errors
+* Make sure `package.json` has a `start` script
+* Make sure your `start` script uses the plain `node index.js`
+* If your `start` script uses `nodemon` then make sure `nodemon` is
+  listed as a dependency in your `package.json`
+
+---
+# Configuring MongoDB on Heroku
+
+* Got to your app on Heroku
+* Go to the Overview tab
+* Click `Configgure Add-ons`
+* Search for `mLab MongoDB` and choose it
+* Choose the `Sandbox - Free` plan and press `Provision`
+* Heroku and mLabs automatically set the `MONGODB_URI` environment
+  property for your deployed app
+
+For further documentation visit their article in the Heroku Dev Center:
+
+https://devcenter.heroku.com/articles/mongolab
 
     </textarea>
     <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->

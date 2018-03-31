@@ -1,5 +1,12 @@
 ![cf](http://i.imgur.com/7v5ASc8.png) 21: Backend Project
 ===
+
+```
+Week 9   Project Week   Mon-Th April 2nd-5th
+Week 10  Project Week   Mon-Th April 9th-12th
+Presentations: Saturday April 14th, 2:00 PM
+```
+
 # Overall Requirements
 * Basic and Bearer Authorization
 * No plain text passwords in the database
@@ -10,24 +17,24 @@
 * Test coverage above 90% (run `jest --coverage`)
 * (optional) Research, learn and utilize any new technology
 
-# First Milestone Objectives
+## First Milestone Objectives
 * Create a group agreement (outlined below)
 * Work as a team to design the models for you application on a whiteboard
 * Setup travis-ci continuous integration and heroku continuous deployment
 * Prototype any critical proofs-of-concepts
   * Are you using an external API? Make sure you can get what you need!
 
-# Second Milestone Objectives
+## Second Milestone Objectives
 * Write the auth layer of your application
 * Build MongoDB models
 * Strive for 90% test code coverage
 * Minimum viable product
 
-# Third Milestone Objectives
+## Third Milestone Objectives
 * Extend MVP with more models, more routes more features
 * Continue striving for 90% code coverage
 
-# Fourth Milestone Objectives
+## Fourth Milestone Objectives
 * Finsh any loose ends
 * Write documentation for all features of your application
 * Pratice your presentation

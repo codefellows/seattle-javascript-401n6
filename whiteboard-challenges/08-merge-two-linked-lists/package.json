@@ -1,0 +1,15 @@
+{
+  "name": "08-merge-two-linked-lists",
+  "version": "1.0.0",
+  "description": "Write a function called `merge` that accepts two sorted Linked Lists and zips them together into one sorted Linked List.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

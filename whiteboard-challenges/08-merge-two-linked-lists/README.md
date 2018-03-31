@@ -1,4 +1,4 @@
-# Tally
+# Merge Two Sorted Linked Lists
 Write a function called `merge` that accepts two sorted
 Linked Lists and returns one new Linked List that's sorted.
 

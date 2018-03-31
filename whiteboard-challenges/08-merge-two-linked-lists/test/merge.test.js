@@ -12,15 +12,7 @@ describe('Merge', () => {
       new LinkedNode(13));
 
     let result = merge(l1, l2);
-    let current = result.root;
-    expect(current.value).toBe(8);
-    current = current.next;
-    expect(current.value).toBe(9);
-    current = current.next;
-    expect(current.value).toBe(12);
-    current = current.next;
-    expect(current.value).toBe(13);
-    current = current.next;
-    expect(current.value).toBe(14);
+    let str = result.toString();
+    expect(str).toEqual('8 -> 9 -> 12 -> 13 -> 14 -> null');
   });
 });

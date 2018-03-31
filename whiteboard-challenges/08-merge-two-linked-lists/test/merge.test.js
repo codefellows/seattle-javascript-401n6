@@ -13,6 +13,7 @@ describe('Merge', () => {
 
     let result = merge(l1, l2);
     let str = result.toString();
+    console.log(str);
     expect(str).toEqual('8 -> 9 -> 12 -> 13 -> 14 -> null');
   });
 });

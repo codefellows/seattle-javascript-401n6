@@ -44,14 +44,12 @@ function merge(l1, l2) {
 
   // if there's one list left over with lots of stuff
   // then step through that list and attach each node
-  while (c1 !== null) {
+  if (c1 !== null) {
     last.next = c1;
-    c1 = c1.next;
   }
 
-  while (c2 !== null) {
+  if (c2 !== null) {
     last.next = c2;
-    c2 = c2.next;
   }
   return result;
 }

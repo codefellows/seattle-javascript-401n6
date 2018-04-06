@@ -54,4 +54,6 @@ function merge(l1, l2) {
   return result;
 }
 
+console.log(merge(new LinkedList(), new LinkedList()))
+
 module.exports = merge;

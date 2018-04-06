@@ -29,6 +29,11 @@ describe('Merge', () => {
     let str = result.toString();
     console.log(str);
     expect(str).toEqual('8 -> 9 -> 12 -> 13 -> 14 -> null');
+
+    result = merge(l2, l1);
+    str = result.toString();
+    console.log(str);
+    expect(str).toEqual('8 -> 9 -> 12 -> 13 -> 14 -> null');
   });
 
   it('Handles left-param empty lists', () => {

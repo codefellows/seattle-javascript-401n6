@@ -1,0 +1,12 @@
+{
+  "name": "10-highest-product",
+  "version": "1.0.0",
+  "description": "Write a function called `highestProduct` that accepts an array of integers. Return the largest value of any two values multiplied together from the array.",
+  "main": "highest-product.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

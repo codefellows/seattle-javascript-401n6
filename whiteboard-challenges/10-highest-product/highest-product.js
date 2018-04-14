@@ -63,6 +63,7 @@ function highestProduct3(arr) {
     // values at different indexes to count.
     // [3, 1, 3] should return 9
     // the second three pushes the first three from largest to nextLargest
+    let val = arr[i];
     if (val >= largest && val >= nextLargest) {
       nextLargest = largest;
       largest = val;
@@ -79,4 +80,10 @@ function highestProduct3(arr) {
   }
 
   return Math.max(largest * nextLargest, smallest * nextSmallest);
+}
+
+module.exports = {
+  highestProduct1,
+  highestProduct2,
+  highestProduct3
 }

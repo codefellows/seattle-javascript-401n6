@@ -22,6 +22,16 @@ npm i react react-dom
 ```
 
 ---
+# Four Main Webpack Concepts
+* **Entry** - the file where the dependency graph begins.
+* **Output** - the folder where everything gets compiled into
+  (like `dist/bundle.js`)`
+* **Loaders** - things that allow webpack to process more than just
+  JavaScript. There are loaders for CSS, images, raw files, and much more!
+* **Plugins** - Fancy modules that accomplish a wide range of tasks, like
+  optimizing bundles, minifying code, and much more!
+
+---
 # .babelrc
 
 **.bacbelrc**
@@ -171,16 +181,6 @@ class App extends React.Component {
 };
 ```
 ---
-# React Tips
-* Accept a `props` parameter in the `constructor`
-* Call `super(props)` on the first in the `contructor`
-* Bind click handler methods at the end of the `constructor`
-  * `this.myClickHandler = this.myClickHandler.bind(this);`
-* Modify state through `.setState(state => return {foo: state.foo + 1})`
-* The `render()` method can only return one element. When in doubt, wrap
-  everything in a `<div>`.
-
----
 # Configuring package.json
 
 * Configure `build` and `watch` commands to run your server
@@ -200,3 +200,13 @@ class App extends React.Component {
   }
 }
 ```
+---
+# React Tips
+* Accept a `props` parameter in the `constructor`
+* Call `super(props)` on the first in the `contructor`
+* Bind click handler methods at the end of the `constructor`
+  * `this.myClickHandler = this.myClickHandler.bind(this);`
+* Modify state through `.setState(state => return {foo: state.foo + 1})`
+* The `render()` method can only return one element. When in doubt, wrap
+  everything in a `<div>`.
+

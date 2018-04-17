@@ -37,7 +37,7 @@
 * Modify and rerender components after clicks
 
 ---
-# Installing (lots of!) Dependencies
+# Install Dependencies
 
 ```bash
 npm i react react-dom
@@ -45,9 +45,7 @@ npm i react react-dom
       babel-core babel-loader
       babel-preset-env
       babel-preset-react
-      node-sass css-loader sass-loader
-      extract-text-webpack-plugin
-      html-webpack-plugin
+      style-loader css-loader
 ```
 
 ---
@@ -73,27 +71,21 @@ npm i react react-dom
 ---
 # webpack.config.js
 ```js
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const config = {
-  mode: 'development',
-  entry: './index.js',
+  mode: "development",
+  entry: "./app.js",
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js'
   },
-  plugins: [new HtmlWebpackPlugin()],
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif)$/,
-        loader: 'file-loader'
-      }
+      {test: /\.js$/, loader: "babel-loader"},
+      {test: /\.css/, loader: [
+        "style-loader", "css-loader"
+      ]},
     ]
   }
 };
@@ -154,6 +146,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
   </head>
   <body>
     <div id="root"></div>
+    <script src="./dist/bundle.js"></script>
   </body>
 </html>
 ```
@@ -161,7 +154,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ---
 # Binding Clicks
 
-**main.js**
+**click-counter.js**
 ```js
 class ClickCounter extends React.Component {
   constructor(props) {
@@ -182,13 +175,15 @@ class ClickCounter extends React.Component {
     </p>
   }
 };
+
+module.exports = ClickCounter
 ```
 
 ---
 # Nesting Components
 
 ```js
-import ClickCounter from './components/click-counter';
+import ClickCounter from './click-counter';
 
 class App extends React.Component {
   constructor(props) {
@@ -271,33 +266,7 @@ nav {
 1. configure `webpack.config.js` file
 1. create minimal `index.html` file
 1. create minimal `main.js` react file
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. reference `./dist/bundle.js` from `index.html` in `<script>` tag
     </textarea>
     <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->
     <script src="file:///Users/moonmayor/Third/remark/out/remark.min.js">

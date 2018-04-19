@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   mode: "development",
@@ -7,6 +8,7 @@ const config = {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js'
   },
+  plugins: [new HtmlWebpackPlugin()],
   module: {
     rules: [
       {test: /\.js$/, loader: "babel-loader"},
@@ -14,7 +16,7 @@ const config = {
         "style-loader", "css-loader"
       ]},
     ]
-  }
+  },
 };
 
 module.exports = config;

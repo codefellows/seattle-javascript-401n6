@@ -8,7 +8,7 @@ class ClickCounter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 101
     }
 
     this.increment = this.increment.bind(this);
@@ -32,7 +32,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "My React App",
+      name: "My React Appsss!!",
       admin: faker.internet.email(),
       content: say({text: faker.hacker.phrase()})
     }
@@ -42,7 +42,7 @@ class App extends React.Component {
     return <div>
       <h1>{this.state.name}</h1>
       <p>
-        Hello, welcome to {this.state.name}.
+        Hello! welcome to {this.state.name}.
         Here at {this.state.name} we believe
         in creating fluid UX...
       </p>
@@ -58,5 +58,6 @@ class App extends React.Component {
   }
 }
 
-const root = document.getElementById('root');
+const root = document.createElement('div');
+document.body.appendChild(root);
 ReactDOM.render(<App/>, root);

@@ -1,3 +1,3 @@
 module.exports = function() {
-  return 'haha ' + Math.random();
+  return 'hahahaha ' + Math.random();
 }

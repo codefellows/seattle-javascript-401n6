@@ -38,6 +38,27 @@
 * Access data from the web via `fetch`
 
 ---
+# Minimal webpack.config.js Revisted
+Webpack 4 introduced giving `output` a default value. If you omit giving your
+config an output property it will build your bundle and place it in
+`./dist/main.js` by default.
+
+```js
+const config = {
+  mode: "development",
+  entry: "./src/app.js",
+  module: {
+    rules: [
+      {test: /\.js$/, loader: 'babel-loader'},
+      {test: /\.css$/, loader: ['style-loader', 'css-loader']},
+    ]
+  }
+}
+
+module.exports = config;
+```
+
+---
 # Gather and render user input
 * Use a `onChange` property on an `<input>`
 * You must `setState` and reset the value of the input before React re-renders
@@ -230,6 +251,91 @@ fetch(url)
 .catch(()=> {
   this.setState({results: []})
 });
+```
+
+---
+# Bonus: Hot Reloading
+`Hot Reloading` is a wonderful development tool that automatically
+reloads a page you're working on whenever you make a change in your
+file.
+
+It allows you to change a color in a CSS file, save it, then
+you'll see your webpage automatically reload colors change.
+
+Hot realoding isn't just a CSS thing. It works for any file in your
+project. You can modify JS, or HTML too. Any time you save you'll
+see the entire app refresh.
+
+It's great, but at the end of the day it's not necessary. It's possible
+to change your tail for hours or day trying to configure a project to get
+hot reloading set up correctly.
+
+If you ever have trouble configuring hot realoding, good luck, and may
+you get it configured, but know when to quit and work old-school without
+it!
+
+---
+# Bonus: Hot Reloading Configuration
+
+**Note:** remove the `index.html` you manually configured that had the
+root div and referenced the `bundle.js` file in a script tag. The
+`html-webpack-plugin` will automatically generate an HTML file that's
+served for you.
+
+```bash
+npm install html-webpack-plugin
+```
+
+Modify the end of `app.js` so it creates it's own `<div>` and attach it
+to the page:
+
+**./src/app.js**
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {...}
+
+const root = document.createElement('div');
+document.body.appendChild(root);
+ReactDOM.render(<App/>, root);
+```
+
+---
+# Bonus: Hot Reloading Configuration
+
+**webpack.config.js**
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const config = {
+  mode: "development",
+  entry: "./src/app.js",
+  module: {
+    rules: [
+      {test: /\.js$/, loader: 'babel-loader'},
+      {test: /\.css$/, loader: ['style-loader', 'css-loader']},
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin()
+  ],
+}
+
+module.exports = config;
+```
+
+---
+# Bonus: Hot Reloading Scripts
+
+**package.json**
+```json
+"scripts": {
+  "build": "webpack",
+  "watch": "webpack --watch",
+  "serve": "webpack-dev-server",
+  "hot": "webpack-dev-server --inline --hot"
+},
 ```
     </textarea>
     <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->

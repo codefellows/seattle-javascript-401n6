@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const config = {
   mode: "development",
   entry: "./src/app.js",
@@ -6,7 +8,10 @@ const config = {
       {test: /\.js$/, loader: 'babel-loader'},
       {test: /\.css$/, loader: ['style-loader', 'css-loader']},
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin()
+  ],
 }
 
 module.exports = config;

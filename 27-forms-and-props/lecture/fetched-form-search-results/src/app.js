@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       title: 'Movie Search',
-      results: ["Rushmore", "Royal Tenenbaums", "Isle of Dogs"]
+      results: ["Rushmore", "Royal Tenenbaums", "Isle of Dogs", "Rushmore"]
     }
   }
 

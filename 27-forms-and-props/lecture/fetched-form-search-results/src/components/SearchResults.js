@@ -5,12 +5,19 @@ class SearchResults extends React.Component {
     super(props);
   }
 
+  listMovies() {
+    return this.props.results.map((result, i) => {
+      return <li key={i}>{result}</li>
+    });
+  }
+
   render() {
-    return <ul>
-      <li>Movie 1</li>
-      <li>Movie 2</li>
-      <li>Movie 3</li>
-    </ul>
+    return <div>
+      <p>Found {this.props.results.length} Movies</p>
+      <ul>
+        {this.listMovies()}
+      </ul>
+    </div>
   }
 }
 

@@ -33,28 +33,17 @@ class ListRenderer extends React.Component {
   }
 
   phrases() {
-    let phrases = [];  
-    for (var i = 0; i < this.state.count; i++) {
-      phrases.push(faker.hacker.phrase());
-    }
-    console.log(phrases);
-
-    return phrases.map(phrase => {
-        return <li>{phrase}</li>
+    let phrases = ["cowabunga", "any array"];
+    phrases = phrases.map(phrase => {
+      return <li>{phrase}</li>
     });
+    return <ol>
+      {phrases}
+    </ol>
   }
 
   render() {
     return <div>
-      <p>Choose how many hacker phrases you want:</p>
-      <form>
-        <input type="number"
-          onChange={this.onChange}
-          value={this.state.count}
-          placeholder="0">
-        </input>
-      </form>
-      {this.getList()}
       {this.phrases()}
     </div>
   }

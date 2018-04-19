@@ -12,12 +12,18 @@ class SearchResults extends React.Component {
   }
 
   render() {
-    return <div>
-      <p>Found {this.props.results.length} Movies</p>
-      <ul>
-        {this.listMovies()}
-      </ul>
-    </div>
+    if (!this.props.hasSearched) {
+      return <div/>
+    } else if (this.props.isLoading) {
+      return <p>Loading...</p>
+    } else {
+      return <div>
+        <p>Found {this.props.results.length} Movies</p>
+        <ul>
+          {this.listMovies()}
+        </ul>
+      </div>
+    }
   }
 }
 

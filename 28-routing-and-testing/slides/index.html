@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      28 Routing
+    </title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-inline-code {
+        color: rgb(66, 134, 244);
+      }
+
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+# ![CF](http://i.imgur.com/7v5ASc8.png) 28 Routing
+
+## Objectives
+* Students will learn to create front end routes using `react-router-dom`
+* Students will learn to restructure their applications into modules
+* Students will learn the difference between view state and application state
+* Students will learn to lift application state to better control one way data flow
+
+---
+# Importing React Router
+* `react-router-dom` provides several components
+* `BrowserRouter` wraps around your whole application
+* `Route` defines what component should be shown for certain URLs
+* `Link` substitutes `<a>` tags so clicking on a `<Link>` navigates
+  users using `BrowserRouter`.
+
+```js
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+```
+
+---
+# Using Router, Route and Link
+* `Router` wraps around the entire app.
+* Use the `Link` component to render links.
+* Use the `exact` keyword to build `path="/"` for the homepage
+
+```js
+<Router>
+  <div>
+    <nav>
+      <h1>ToDo List</h1>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
+      </ul>
+    </nav>
+    <div id="main-content">
+      <Route exact path="/" component={Landing}/>
+      <Route path="/dashboard" component={Dashboard}/>
+    </div>
+  </div>
+</Router>
+```
+    </textarea>
+    <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->
+    <script src="file:///Users/moonmayor/Third/remark/out/remark.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+    <!-- <script src="http://5tephen.com/js/remarkable.js"></script> -->
+  </body>
+</html>

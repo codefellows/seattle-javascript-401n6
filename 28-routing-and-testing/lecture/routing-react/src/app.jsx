@@ -23,8 +23,6 @@ class App extends React.Component {
       <div>
         <nav>
           <ul>
-            <li><a href="/">Homepage</a></li>
-            <li><a href="/contacts">Contacts</a></li>
             <li><Link to="/">Homepage</Link></li>
             <li><Link to="/contacts">Contacts</Link></li>
           </ul>

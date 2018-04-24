@@ -4,6 +4,12 @@ const config = {
   mode: 'development',
   entry: './src/app.jsx',
   plugins: [new HtmlPlugin({template: __dirname + '/src/index.html'})],
+  // devServer: {
+  //   port: 3000,
+  //   historyApiFallback: {
+  //     index: 'index.html'
+  //   }
+  // },
   module: {
     rules: [
       {

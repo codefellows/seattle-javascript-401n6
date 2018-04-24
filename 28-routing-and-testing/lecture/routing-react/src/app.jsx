@@ -30,7 +30,7 @@ class App extends React.Component {
         </nav>
         <h1>{this.state.title}</h1>
         <Route exact path="/" component={Homepage} />
-        <Route path="/" component={Contacts} />
+        <Route path="/contacts" component={Contacts} />
       </div>
     </Router>
   }

@@ -4,6 +4,12 @@ import {Link} from 'react-router-dom';
 class Contact extends React.Component {
   constructor(props) {
     super(props);
+    this.remove = this.remove.bind(this);
+  }
+
+  remove() {
+    console.log('removing', this.props.index)
+    this.props.removeContact(this.props.index);
   }
 
   render() {
@@ -17,6 +23,7 @@ class Contact extends React.Component {
           {this.props.number}
         </a>
       </span>
+      <button onClick={this.remove}>remove</button>
     </div>
   }
 }

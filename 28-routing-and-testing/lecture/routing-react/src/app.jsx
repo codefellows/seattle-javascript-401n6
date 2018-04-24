@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import Homepage from './components/homepage.jsx';
-import Contacts from './components/contacts.jsx';
+import Contacts from './components/ContactsPage.jsx';
 import './style/main.scss';
 
 class App extends React.Component {
@@ -30,7 +30,7 @@ class App extends React.Component {
         </nav>
         <h1>{this.state.title}</h1>
         <Route exact path="/" component={Homepage} />
-        <Route path="/contacts" component={Contacts} />
+        <Route path="/" component={Contacts} />
       </div>
     </Router>
   }

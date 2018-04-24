@@ -8,8 +8,10 @@ class ContactList extends React.Component {
   }
 
   list() {
-    return this.props.contacts.map((contact, key) => {
-      return <Contact name={contact.name} number={contact.number} key={key}/>;
+    return this.props.contacts.map((contact, index) => {
+      return <Contact name={contact.name} number={contact.number}
+        key={index} index={index}
+        removeContact={this.props.removeContact}/>;
     });
   }
 

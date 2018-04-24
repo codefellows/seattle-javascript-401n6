@@ -11,7 +11,7 @@ const config = {
         loader: ["babel-loader"],
         exclude: /node_modules/
       },
-      {test: /\.s?css$/, loader: [
+      {test: /\.(scss|css)$/, loader: [
         "style-loader",
         "css-loader",
         "sass-loader"

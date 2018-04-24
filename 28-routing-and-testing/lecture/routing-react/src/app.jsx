@@ -9,6 +9,7 @@ import {
 
 import Homepage from './components/homepage.jsx';
 import Contacts from './components/contacts.jsx';
+import './style/main.scss';
 
 class App extends React.Component {
   constructor(props) {

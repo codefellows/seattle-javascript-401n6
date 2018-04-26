@@ -7,8 +7,6 @@ class Contact extends React.Component {
     super(props);
     this.state = {
       isEditing: false,
-      name: this.props.name,
-      number: this.props.number
     }
     this.remove = this.remove.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -25,8 +23,10 @@ class Contact extends React.Component {
 
   finishEdit(contactInfo) {
     console.log('finish', contactInfo);
-    this.setState(contactInfo);
     this.setState({isEditing: false});
+
+    // notify the contacts page of the modified state
+    this.props.editContact(contactInfo, this.props.index);
   }
 
   render() {
@@ -37,12 +37,12 @@ class Contact extends React.Component {
     }
     return <div onDoubleClick={this.toggleEdit}>
       <span>Name: 
-        <Link to={"/contacts/" + this.state.number}>
-          {this.state.name}
+        <Link to={"/contacts/" + this.props.number}>
+          {this.props.name}
         </Link>
       </span>
-      <span>Number: <a href={"tel:" + this.state.number}>
-          {this.state.number}
+      <span>Number: <a href={"tel:" + this.props.number}>
+          {this.props.number}
         </a>
       </span>
       <button onClick={this.remove}>remove</button>

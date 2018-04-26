@@ -14,25 +14,34 @@ class Contacts extends React.Component {
     ]};
     this.addContact = this.addContact.bind(this);
     this.removeContact = this.removeContact.bind(this);
+    this.editContact = this.editContact.bind(this);
   }
 
   addContact(contact) {
-    console.log('got new contact', contact);
     this.state.contacts.push(contact);
     this.setState({contacts: this.state.contacts});
   }
 
   removeContact(index) {
-    console.log('page removing', index);
     this.state.contacts.splice(index, 1);
     this.setState({contacts: this.state.contacts});
+  }
+
+  editContact(contactInfo, index) {
+    let newArray = [...this.state.contacts];
+    newArray[index] = contactInfo;
+    this.setState({contacts: newArray});
   }
 
   render() {
     return <div>
       <ContactForm addContact={this.addContact}/>
       <ContactList contacts={this.state.contacts} 
-        removeContact={this.removeContact}/>
+        removeContact={this.removeContact}
+        editContact={this.editContact}/>
+      <ContactList contacts={this.state.contacts} 
+        removeContact={this.removeContact}
+        editContact={this.editContact}/>
     </div>
   }
 }

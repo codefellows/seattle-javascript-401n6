@@ -3,7 +3,9 @@ const HtmlPlugin = require('html-webpack-plugin');
 const config = {
   mode: 'development',
   entry: './src/app.jsx',
-  plugins: [new HtmlPlugin({template: __dirname + '/src/index.html'})],
+  plugins: [
+    new HtmlPlugin({template: __dirname + '/src/index.html'})
+  ],
   // devServer: {
   //   port: 3000,
   //   historyApiFallback: {

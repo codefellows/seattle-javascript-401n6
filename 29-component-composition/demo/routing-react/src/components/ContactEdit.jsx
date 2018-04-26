@@ -17,7 +17,6 @@ class ContactEdit extends React.Component {
   update(ev) {
     let newState = {};
     newState[ev.target.name] = ev.target.value;
-    console.log(ev.target.name, ev.target.value)
     this.setState(newState);
   }
 

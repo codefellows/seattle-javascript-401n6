@@ -14,5 +14,6 @@ Expected input/output:
 isDiff({foo: 'bar'}, {foo: 'bar'}) // false
 isDiff({foo: 'bar'}, {foo: 'qqq'}) // true different values with a key
 isDiff({foo: 'bar'}, {}) // true missing a key
+isDiff({}, {foo: 'bar'}) // true missing a key
 ```
 

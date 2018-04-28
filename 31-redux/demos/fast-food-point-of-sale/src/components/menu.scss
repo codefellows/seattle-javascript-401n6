@@ -1,0 +1,22 @@
+$spacing: .5em;
+$small-spacing: .2em;
+
+.menu-item {
+  background-color: white;
+  margin: $spacing;
+  padding: 0 $spacing;
+
+  .price {
+    text-align: right;
+    margin-right: $spacing;
+  }
+
+  p, button {
+    display: inline-block;
+    margin: $small-spacing;
+  }
+
+  button {
+    margin-right: 1em;
+  }
+}

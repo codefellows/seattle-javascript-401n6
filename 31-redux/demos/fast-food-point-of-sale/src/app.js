@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Menu from './components/Menu';
+import MenuData from './data/jack-in-the-box'
+import './main.scss';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,9 +11,7 @@ class App extends React.Component {
 
   render() {
     return <div>
-      <h1>Hello</h1>
-      <p>hi.</p>
-      <Menu menuitems={[]} />
+      <Menu menu={MenuData} />
     </div>
   }
 }

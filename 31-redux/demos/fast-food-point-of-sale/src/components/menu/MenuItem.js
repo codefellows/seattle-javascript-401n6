@@ -4,16 +4,16 @@ import PriceIndividual from './PriceIndividual';
 class MenuItem extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.addToOrder = this.addToOrder.bind(this);
+    this.action = this.action.bind(this);
   }
 
-  addToOrder() {
-    this.props.addToOrder(this.props.item);
+  action() {
+    this.props.action(this.props.item);
   }
 
   render() {
     return <div className="menu-item">
-      <button onClick={this.addToOrder}>add</button>
+      <button onClick={this.action}>{this.props.actionName}</button>
       <p className="price">
         <PriceIndividual price={this.props.item.price} />
       </p>

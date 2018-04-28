@@ -15,15 +15,20 @@ class MenuSystem extends React.Component {
     };
 
     this.addToOrder = this.addToOrder.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
   }
 
   addToOrder(item) {
-    // let order = this.state.order.slice();
-    // order.push(item);
-    // this.setState({order});
+    let order = this.state.order.slice();
+    order.push(item);
+    this.setState({order});
+  }
 
-    this.state.order.push(item);
-    this.setState({order: this.state.order});
+  removeFromOrder(item) {
+    let order = this.state.order.slice();
+    let index = order.indexOf(item);
+    order.splice(index, 1);
+    this.setState({order});
   }
 
   reset() {
@@ -44,11 +49,14 @@ class MenuSystem extends React.Component {
             {this.props.menuData.name}
           </h1>
           <MenuList items={this.props.menuData.items} 
-                    addToOrder={this.addToOrder} />
+                    action={this.addToOrder} 
+                    actionName="add" />
         </div>
         <div className="col-xs-6">
           <h1>Current Order</h1>
-          <MenuList items={this.state.order} />
+          <MenuList items={this.state.order} 
+                    action={this.removeFromOrder} 
+                    actionName="remove" />
         </div>
       </div>
       <div className="row">

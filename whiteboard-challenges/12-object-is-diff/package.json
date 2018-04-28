@@ -1,0 +1,12 @@
+{
+  "name": "12-object-is-diff",
+  "version": "1.0.0",
+  "description": "Imagine you're writing a function as part of React. How can you tell when the app should be rerendered? When states are different!",
+  "main": "is-diff.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

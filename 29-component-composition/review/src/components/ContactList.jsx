@@ -14,7 +14,8 @@ class ContactList extends React.Component {
       // can access it
       return <ContactItem name={contact.name} number={contact.number}
         key={index} index={index}
-        removeContact={this.props.removeContact}/>;
+        updateContact={this.props.updateContact}
+        removeContact={this.props.removeContact} />;
     });
   }
 

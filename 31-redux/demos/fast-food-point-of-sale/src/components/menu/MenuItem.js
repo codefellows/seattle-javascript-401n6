@@ -1,16 +1,21 @@
 import React from 'react';
-import MenuPrice from './MenuPrice';
+import PriceIndividual from './PriceIndividual';
 
-class MenuItem extends React.Component {
+class MenuItem extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.addToOrder = this.addToOrder.bind(this);
+  }
+
+  addToOrder() {
+    this.props.addToOrder(this.props.item);
   }
 
   render() {
     return <div className="menu-item">
-      <button>add</button>
+      <button onClick={this.addToOrder}>add</button>
       <p className="price">
-        <MenuPrice price={this.props.item.price} />
+        <PriceIndividual price={this.props.item.price} />
       </p>
       <p className="item">{this.props.item.item}</p>
     </div>

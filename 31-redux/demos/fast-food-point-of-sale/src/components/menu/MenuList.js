@@ -7,6 +7,7 @@ export default (props) => {
     return <p>No menu items available.</p>
   }
   return props.items.map((item, i) => {
-    return <MenuItem item={item} key={i}/>
+    return <MenuItem item={item} key={i}
+                     addToOrder={props.addToOrder} />
   })
 }

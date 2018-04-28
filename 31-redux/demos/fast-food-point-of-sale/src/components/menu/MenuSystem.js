@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MenuList from './MenuList';
-import OrderTotal from './OrderTotal';
+import PriceTotal from './PriceTotal';
 
 class MenuSystem extends React.Component {
   constructor(props) {
@@ -13,6 +13,26 @@ class MenuSystem extends React.Component {
         this.props.menuData.items[0]
       ]
     };
+
+    this.addToOrder = this.addToOrder.bind(this);
+  }
+
+  addToOrder(item) {
+    // let order = this.state.order.slice();
+    // order.push(item);
+    // this.setState({order});
+
+    this.state.order.push(item);
+    this.setState({order: this.state.order});
+  }
+
+  reset() {
+    this.setState({order: []});
+  }
+
+  finish() {
+    let total = 0;
+    this.setState({total: total});
   }
 
   render() {
@@ -23,7 +43,8 @@ class MenuSystem extends React.Component {
             <img className="logo" src={this.props.menuData.logo} />
             {this.props.menuData.name}
           </h1>
-          <MenuList items={this.props.menuData.items} />
+          <MenuList items={this.props.menuData.items} 
+                    addToOrder={this.addToOrder} />
         </div>
         <div className="col-xs-6">
           <h1>Current Order</h1>
@@ -32,7 +53,11 @@ class MenuSystem extends React.Component {
       </div>
       <div className="row">
         <div className="col-xs-12 text-right">
-          <OrderTotal items={this.state.order} />
+          <h1>
+            Total: <PriceTotal items={this.state.order} />
+            <button onClick={this.reset}>reset</button>
+            <button onClick={this.finish}>finish</button>
+          </h1>
         </div>
       </div>
     </div>

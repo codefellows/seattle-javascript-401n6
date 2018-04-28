@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Menu from './components/Menu';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends React.Component {
     return <div>
       <h1>Hello</h1>
       <p>hi.</p>
+      <Menu menuitems={[]} />
     </div>
   }
 }

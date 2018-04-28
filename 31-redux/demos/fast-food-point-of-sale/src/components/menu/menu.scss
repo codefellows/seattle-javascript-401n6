@@ -4,6 +4,10 @@ $small-spacing: .2em;
 .menu {
   background-color: white;
   margin: 1em;
+
+  .logo {
+    max-height: 2em;
+  }
 }
 
 .menu-item {

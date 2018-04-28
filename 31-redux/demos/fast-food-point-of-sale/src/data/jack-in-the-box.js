@@ -1,4 +1,7 @@
+let logo = require('../assets/jack-in-the-box-logo.png');
+
 const menu = {
+  logo: logo,
   name: "Jack in the Box",
   items: [
     {item: "2 Tacos", price: 99},

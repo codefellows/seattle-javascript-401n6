@@ -1,10 +1,18 @@
 $spacing: .5em;
 $small-spacing: .2em;
 
+.menu {
+  background-color: white;
+  margin: 1em;
+}
+
 .menu-item {
   background-color: white;
   margin: $spacing;
   padding: 0 $spacing;
+
+  margin-left: 0;
+  padding-left: 0;
 
   .price {
     text-align: right;

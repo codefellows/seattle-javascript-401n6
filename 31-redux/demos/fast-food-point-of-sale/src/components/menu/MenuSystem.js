@@ -6,14 +6,19 @@ import PriceIndividual from './PriceIndividual';
 class MenuSystem extends React.Component {
   constructor(props) {
     super(props);
+
+    let randomItems = 5;
+    let items = [];
+    for (var i = 0; i < randomItems; i++) {
+      let index = Math.floor(Math.random() * this.props.menuData.items.length);
+      let item = this.props.menuData.items[index];
+      items.push(item);
+    }
+
     this.state = {
       totalOrders: 0,
       todaysTotal: 0,
-      order: [
-        this.props.menuData.items[0],
-        this.props.menuData.items[1],
-        this.props.menuData.items[0]
-      ]
+      order: items
     };
 
     this.addToOrder = this.addToOrder.bind(this);

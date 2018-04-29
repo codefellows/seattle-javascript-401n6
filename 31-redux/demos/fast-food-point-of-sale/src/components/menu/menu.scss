@@ -4,9 +4,23 @@ $small-spacing: .2em;
 .menu {
   background-color: white;
   margin: 1em;
+  max-height: 100%;
+  position: relative;
 
   .logo {
     max-height: 2em;
+  }
+
+  .totals {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .order-actions {
+    button {
+      width: 100%;
+    }
   }
 }
 

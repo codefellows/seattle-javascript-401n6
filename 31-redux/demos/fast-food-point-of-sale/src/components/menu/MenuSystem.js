@@ -1,12 +1,14 @@
 import React from 'react';
 
 import MenuList from './MenuList';
-import PriceTotal from './PriceTotal';
+import PriceIndividual from './PriceIndividual';
 
 class MenuSystem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      totalOrders: 0,
+      todaysTotal: 0,
       order: [
         this.props.menuData.items[0],
         this.props.menuData.items[1],
@@ -15,7 +17,10 @@ class MenuSystem extends React.Component {
     };
 
     this.addToOrder = this.addToOrder.bind(this);
-    this.removeFromOrder = this.removeFromOrder.bind(this);
+    this.removeFromOrder = this.addToOrder.bind(this);
+    this.reset = this.reset.bind(this);
+    this.finish = this.finish.bind(this);
+    this.total = this.total.bind(this);
   }
 
   addToOrder(item) {
@@ -36,36 +41,64 @@ class MenuSystem extends React.Component {
   }
 
   finish() {
-    let total = 0;
-    this.setState({total: total});
+    this.setState({
+      totalOrders: this.state.totalOrders + 1,
+      todaysTotal: this.state.todaysTotal + this.total(),
+      order: []
+    });
+  }
+
+  total() {
+    return this.state.order.reduce((total, item) => {
+      return total + item.price;
+    }, 0);
   }
 
   render() {
-    return <div className="menu container-fluid">
-      <div className="row">
-        <div className="col-xs-6">
+    return <div className="container-fluid">
+      <div className="menu row">
+        <div className="col-xs-12">
           <h1>
             <img className="logo" src={this.props.menuData.logo} />
             {this.props.menuData.name}
           </h1>
+        </div>
+      </div>
+
+      <div className="menu row">
+        <div className="col-xs-6">
+          <h1>Menu Items</h1>
           <MenuList items={this.props.menuData.items} 
                     action={this.addToOrder} 
                     actionName="add" />
         </div>
         <div className="col-xs-6">
-          <h1>Current Order</h1>
+          <div className="order-actions row">
+            <div className="col-xs-6">
+              <h1><button onClick={this.reset}>reset</button></h1>
+            </div>
+            <div className="col-xs-6">
+              <h1><button onClick={this.finish}>finish</button></h1>
+            </div>
+          </div>
+          <h1>
+            <span>Current Order: </span>
+            <PriceIndividual price={this.total()} />
+          </h1>
           <MenuList items={this.state.order} 
                     action={this.removeFromOrder} 
                     actionName="remove" />
         </div>
       </div>
-      <div className="row">
-        <div className="col-xs-12 text-right">
-          <h1>
-            Total: <PriceTotal items={this.state.order} />
-            <button onClick={this.reset}>reset</button>
-            <button onClick={this.finish}>finish</button>
-          </h1>
+
+      <div className="menu row">
+        <div className="col-xs-12">
+          <p>
+            Orders placed: {this.state.totalOrders}
+          </p>
+          <p>
+            Today's Total: <PriceIndividual price={this.state.todaysTotal} />
+          </p>
         </div>
       </div>
     </div>

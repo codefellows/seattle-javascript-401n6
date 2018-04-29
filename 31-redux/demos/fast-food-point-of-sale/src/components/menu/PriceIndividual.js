@@ -1,3 +1,5 @@
+import React from 'react';
+
 // helper function that converts a penny-price value
 // like the number 209 into displaying as "$2.09"
 export default (props) => {
@@ -6,5 +8,6 @@ export default (props) => {
   if (pennies < 10) {
     pennies = '0' + pennies;
   }
-  return `\$${dollars}.${pennies}`;
+  let display = `\$${dollars}.${pennies}`
+  return <span>{display}</span>;
 }

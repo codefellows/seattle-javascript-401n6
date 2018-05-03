@@ -12,10 +12,10 @@ export function decrement() {
 }
 
 export function incrementBy(value) {
-	return {type: INCREMENT, value}
+	return {type: INCREMENT_BY, value}
 }
 
 export function decrementBy(value) {
-	return {type: INCREMENT, value}
+	return {type: DECREMENT_BY, value}
 }
 

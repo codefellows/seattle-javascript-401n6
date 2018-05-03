@@ -3,17 +3,12 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 import {BrowserRouter, Route} from 'react-router-dom'
 
-import counterApp from '../reducers/counter-app';
-const store = createStore(counterApp);
+import counterAppReducer from '../reducers/counter-app';
+const store = createStore(counterAppReducer);
 
 import Dashboard from './Dashboard';
 
 class App extends React.Component {
-  //componentDidMount() {
-  //  store.subscribe(() => console.log('__STATE__: ', store.getState()))
-  //  store.dispatch({type: null})
-  //}
-
   render() {
     return (
 			<Provider store={store}>

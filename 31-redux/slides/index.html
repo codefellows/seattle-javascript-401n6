@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      31 Redux
+    </title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-inline-code {
+        color: rgb(66, 134, 244);
+      }
+
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+# ![CF](http://i.imgur.com/7v5ASc8.png) 31 Redux
+
+## Objectives
+* Students will learn to use redux with react
+* Students will learn to design redux reducer's for controlling application state
+* Students will learn to design action creator functions for working with redux
+
+---
+# Redux: Three Principles
+
+### Single Source of Truth
+* A single state tree makes things easier to debug
+* Enables you to persist app state in development
+* Makes undo/redo state management timeline possible
+
+### State is read-only
+* All changes are centralized and happen one by one in a strict order
+* No subtle race conditions to watch out for.
+* Actions can be logged, serialized, stored, and later replayed for
+  debugging or testing purposes.
+
+### Changes are made with pure functions
+* Return new state objects, instead of mutating the previous state.
+
+---
+# Actions, Reducers, Store
+Redux uses three things together to manage state:
+
+* **Actions** - payloads of info sent from the application to the store.
+* **Reducers** - specify how app state changes in response to actions.
+* **Store** - holds all app state. 
+  * Allows access to state via `getState()`
+  * Allows state to update via `dispatch(action)`
+  * Registers listeners via `subscribe(listener)`
+
+---
+# Actions
+All `actions` are a plain JavaScript object. They must have a `.type`
+property. 
+
+```js
+{
+  type: TOGGLE_TODO,
+  index: 5
+}
+```
+
+---
+# Actions: Prefer Constants over Raw Strings 
+It's a good idea to define variables for String constants, then to always
+refer to that constant. This makes it easy to update the value of the
+String in the future, saves you from making hard-to-find typos typing raw
+strings elsewhere, and allows tools to pick up actions that are actually
+defined in your files.
+
+**actions.js**
+```js
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const INCREMENT-BY = 'INCREMENT-BY';
+```
+
+---
+# Action Creators
+Action Creators are functions that create actions. They use the constants
+you defined earlier in the file. Action Creators can accept parameters
+to include value properties in the action.
+
+Later you'll `dispatch` actions:
+
+```js
+dispatch(incrementBy(12));
+```
+
+**actions.js**
+```js
+export function increment() {
+  return {type: INCREMENT};
+}
+
+export function incrementBy(value) {
+  return {type: INCREMENT, value: value};
+}
+
+export function decrement() {
+  return {type: DECREMENT};
+}
+```
+
+---
+# Reducers
+The reducer is a pure function that takes the previous state and an action, and
+returns the next state. A pure function is a function that always produces the
+**same output** given the **same input**. The original state should be unchanged.
+
+```js
+(previousState, action) => newState
+```
+
+```js
+import {INCREMENT, DECREMENT} from './actions';
+const initialState = {data: 0};
+
+function myAppReducer(state, action) {
+  if (state === undefined) {
+    return initialState;
+  }
+
+  // a switch block compares a value to the value associated with each case.
+  switch(action.type) {
+    case INCREMENT: return {data: state.data + 1};
+    case DECREMENT: return {data: state.data - 1};
+    default: return state;
+  }
+}
+```
+
+---
+# Presentational and Container Components
+
+## Presentational Components
+* Are concerned with how things look.
+* Have no dependencies on the rest of the app.
+* Don’t specify how the data is loaded or mutated.
+* Receive data and callbacks exclusively via props.
+* Rarely have their own state (when they do, it’s UI state rather than data).
+* Examples: Page, Sidebar, Story, UserInfo, List.
+
+---
+# Presentational and Container Components
+
+## Container Components
+* Are concerned with how things work.
+* May contain both presentational and container components inside
+* Usually don’t have any DOM markup of their own except for some wrapping divs
+* Never have any styles.
+* Provide the data and behavior to presentational or other container components.
+* Examples: UserPage, FollowersSidebar, StoryContainer, FollowedUserList.
+
+---
+# Presentational and Container Components
+
+<table border="1">
+  <tr>
+    <th></th>
+    <th>Presentational Components</th>
+    <th>Container Components</th>
+  </tr>
+
+  <tr>
+    <td>Purpose</td>
+    <td>How things look (markup, styles)</td>
+    <td>How things work (data fetching, state updates)</td>
+  </tr>
+
+  <tr>
+    <td>Aware of Redux</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+
+  <tr>
+    <td>To read data</td>
+    <td>Read data from props</td>
+    <td>Subscribe to Redux state</td>
+  </tr>
+
+  <tr>
+    <td>To change data</td>
+    <td>Invoke callbacks from props</td>
+    <td>Dispatch Redux actions</td>
+  </tr>
+
+  <tr>
+    <td>Are written</td>
+    <td>By hand</td>
+    <td>Usually generated by React Redux</td>
+  </tr>
+</table>
+
+---
+# Providing the Store
+
+The `store` is where all the data for the whole app lives.
+Create the store with `createStore` provided by Redux.
+
+Wrap the whole `<App/>` inside a `<Provider>` that's had
+`store` passed into it. This will make the store available
+everywhere in your application.
+
+```js
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+import App from './components/App'
+
+const store = createStore(todoApp)
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+```
+
+---
+# Overall File Structure
+
+```txt
+src
+├── main.js
+├── action
+│   └── category-actions.js
+├── component
+│   ├── app.js
+│   ├── category
+│   │   └── category-form
+│   │       ├── _category-form.scss
+│   │       └── category-form.js
+│   └── dashboard
+│       ├── _dashboard.scss
+│       └── dashboard.js
+├── reducer
+│   └── category.js
+└── style
+    └── main.scss
+```
+
+---
+# Dependencies
+Version numbers here aren't important.
+
+```jsson
+"dependencies": {
+  "babel-core": "^6.26.3",
+  "babel-loader": "^7.1.4",
+  "babel-preset-env": "^1.6.1",
+  "babel-preset-react": "^6.24.1",
+  "css-loader": "^0.28.11",
+  "html-webpack-plugin": "^3.2.0",
+  "node-sass": "^4.9.0",
+  "react": "^16.3.2",
+  "react-dom": "^16.3.2",
+  "react-redux": "^5.0.7",
+  "react-router-dom": "^4.2.2",
+  "redux": "^4.0.0",
+  "sass-loader": "^7.0.1",
+  "style-loader": "^0.21.0",
+  "webpack": "^4.6.0",
+  "webpack-dev-server": "^3.1.4"
+}
+```
+
+    </textarea>
+    <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->
+    <script src="file:///Users/moonmayor/Third/remark/out/remark.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+    <!-- <script src="http://5tephen.com/js/remarkable.js"></script> -->
+  </body>
+</html>

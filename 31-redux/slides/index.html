@@ -284,6 +284,76 @@ Version numbers here aren't important.
 }
 ```
 
+---
+# Passing State to dispatch()
+In order to pass state from a component to a
+dispatch that's been mapped to props you must
+change the `onClick` reference to a arrow function
+that executes itself when someone clicks and
+passes the state as a parameter.
+
+```html
+<button onClick={() => this.props.decrementBy(this.state.decBy)}>
+  decrement by
+</button>
+```
+
+```js
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increment: () => dispatch(increment()),
+    decrement: () => dispatch(decrement()),
+    incrementBy: (val) => dispatch(incrementBy(val)),
+    decrementBy: (val) => dispatch(decrementBy(val)),
+  }
+};
+```
+
+---
+# Use Object.assign
+
+* [MDN Docs Object.assign](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+
+Use `Object.assign` to preserve all the other
+properties on the state, and to apply all the
+properties of state to a new object so it doesn't
+overwrite the old state.
+
+```js
+let newState = {};
+switch(action.type) {
+  case INCREMENT:
+    return Object.assign(newState, state, {data: state.data + 1});
+}
+```
+
+---
+# .connect() / mapState / mapDispatch
+
+```js
+class Dashboard extends React.Component {
+  // component stuff
+}
+
+// pick properties of state to be avail in .props
+const mapStateToProps = state => ({
+  data: state.data,
+  appName: state.appName,
+});
+
+// create functions that will dispatch actions
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increment: () => dispatch(increment()),
+    decrement: () => dispatch(decrement()),
+    incrementBy: (val) => dispatch(incrementBy(val)),
+    decrementBy: (val) => dispatch(decrementBy(val)),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+```
+
     </textarea>
     <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->
     <script src="file:///Users/moonmayor/Third/remark/out/remark.min.js">

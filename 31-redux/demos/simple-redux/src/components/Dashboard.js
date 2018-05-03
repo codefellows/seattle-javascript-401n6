@@ -60,6 +60,7 @@ const mapStateToProps = state => ({
   appName: state.appName,
 });
 
+// TODO: find out what's up getState here.
 const mapDispatchToProps = (dispatch, getState) => {
   return {
     increment: () => dispatch(increment()),

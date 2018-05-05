@@ -1,0 +1,12 @@
+{
+  "name": "13-binary-trees",
+  "version": "1.0.0",
+  "description": "## Types of Trees * Binary Trees * Binary Search Trees * K-aryTrees",
+  "main": "binary-tree.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

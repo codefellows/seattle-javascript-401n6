@@ -3,8 +3,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 import {BrowserRouter, Route} from 'react-router-dom'
 
-import reducer from '../reducers/counter-app';
-const store = createStore(reducer);
+import reducers from '../reducers/';
+const store = createStore(reducers);
 
 import MainPage from './MainPage';
 

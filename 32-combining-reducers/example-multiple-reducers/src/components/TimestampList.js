@@ -1,32 +1,33 @@
 import React from 'react'
+import {connect} from 'react-redux';
+import {
+  addTimestamp
+} from '../actions/timestamp-actions';
 
-export default class TimestampList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timestamps: [
-        Date.now(),
-        Date.now(),
-        Date.now(),
-      ]
-    }
-    this.addTimestamp = this.addTimestamp.bind(this);
-  }
-
-  addTimestamp() {
-    let state = {timestamps: [...this.state.timestamps, Date.now()]}
-    this.setState(state);
-  }
-
+class TimestampList extends React.Component {
   render() {
     return <React.Fragment>
       <h1>Timestamps</h1>
       <div>
-        <button onClick={this.addTimestamp}>add timestamp</button>
+        <button onClick={this.props.addTimestamp}>add timestamp</button>
       </div>
-      {this.state.timestamps.map(timestamp => {
+      {this.props.timestamps.map(timestamp => {
         return <div>{timestamp.toString()}</div>
       })}
     </React.Fragment>
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    timestamps: state.timestamps.timestamps
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTimestamp: () => dispatch(addTimestamp())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimestampList);

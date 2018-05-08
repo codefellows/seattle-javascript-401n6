@@ -14,6 +14,8 @@ export default function counterReducer(state, action) {
   if (state === undefined) {
     return initialState;
   }
+  console.log('counter', state);
+  debugger
 
   let newState = {};
   switch(action.type) {

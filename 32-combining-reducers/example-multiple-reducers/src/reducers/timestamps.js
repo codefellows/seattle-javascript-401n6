@@ -10,12 +10,14 @@ export default function counterReducer(state, action) {
   if (state === undefined) {
     return initialState;
   }
+  console.log('timestamp', state);
+  debugger
 
   switch(action.type) {
     case ADD_TIMESTAMP:
       let newState = {
         ...state,
-        timestamps: [...this.state.timestamps, Date.now()]
+        timestamps: [...state.timestamps, Date.now()]
       };
       return newState;
     default: return state;

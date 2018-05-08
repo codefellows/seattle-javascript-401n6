@@ -10,12 +10,20 @@ export default class TimestampList extends React.Component {
         Date.now(),
       ]
     }
+    this.addTimestamp = this.addTimestamp.bind(this);
+  }
+
+  addTimestamp() {
+    let state = {timestamps: [...this.state.timestamps, Date.now()]}
+    this.setState(state);
   }
 
   render() {
     return <React.Fragment>
       <h1>Timestamps</h1>
-      <div>{this.state.timestamps.length}</div>
+      <div>
+        <button onClick={this.addTimestamp}>add timestamp</button>
+      </div>
       {this.state.timestamps.map(timestamp => {
         return <div>{timestamp.toString()}</div>
       })}

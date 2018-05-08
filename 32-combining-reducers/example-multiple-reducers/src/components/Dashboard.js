@@ -55,8 +55,8 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.data,
-  appName: state.appName,
+  data: state.counter.data,
+  appName: state.counter.appName,
 });
 
 // TODO: find out what's up getState here.

@@ -92,7 +92,9 @@ class BinarySearchTree {
   // true for tree with [2 4 6 8 10] because it has 6
   // false for tree with [1 2 3 4 5 6] because it has no 3.5
   doesTreeContainAverage() {
-
+    // step 1: go through tree to determine average value.
+    // step 2: go through tree again to see if it has that value.
+    // step 3: return result
   }
 }
 

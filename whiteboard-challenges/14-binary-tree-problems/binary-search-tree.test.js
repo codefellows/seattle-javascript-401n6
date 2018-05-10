@@ -11,10 +11,10 @@ describe('Binary Search Tree', () => {
   });
 
   describe('isEmpty()', () => {
-    test.skip('empty tree is empty', () => {
+    test('empty tree is empty', () => {
       expect(emptyTree().isEmpty()).toBe(true);
     })
-    test.skip('non-empty tree isn\'t empty', () => {
+    test('non-empty tree isn\'t empty', () => {
       expect(oneTree().isEmpty()).toBe(false);
       expect(twoTree().isEmpty()).toBe(false);
       expect(fullTree().isEmpty()).toBe(false);
@@ -22,7 +22,7 @@ describe('Binary Search Tree', () => {
   });
 
   describe('contains()', () => {
-    test.skip('empty tree never has anything', () => {
+    test('empty tree never has anything', () => {
       expect(emptyTree().contains(0)).toBe(false);
       expect(emptyTree().contains(2)).toBe(false);
       expect(emptyTree().contains(3)).toBe(false);
@@ -48,7 +48,7 @@ describe('Binary Search Tree', () => {
   });
 
   describe('add()', () => {
-    test.skip('non-empty tree isn\'t empty', () => {
+    test('non-empty tree isn\'t empty', () => {
       let tree = new BinarySearchTree();
       expect(tree.isEmpty()).toBe(true);
 
@@ -70,40 +70,40 @@ describe('Binary Search Tree', () => {
   });
 
   describe('minValue()', () => {
-    test.skip('returns undefined if empty', () => {
+    test('returns undefined if empty', () => {
       expect(emptyTree().minValue()).toBe(undefined);
     });
 
-    test.skip('returns value', () => {
+    test('returns value', () => {
       expect(addedFullTree().minValue()).toBe(2);
     });
 
-    test.skip('many-value stress test', () => {
+    test('many-value stress test', () => {
       let {tree, min} = hugeTreeWithStats();
       expect(tree.minValue()).toBe(min);
     });
   });
 
   describe('maxValue()', () => {
-    test.skip('returns undefined if empty', () => {
+    test('returns undefined if empty', () => {
       expect(emptyTree().maxValue()).toBe(undefined);
     });
 
-    test.skip('returns value', () => {
+    test('returns value', () => {
       expect(addedFullTree().maxValue()).toBe(7);
     });
 
-    test.skip('many-value stress test', () => {
+    test('many-value stress test', () => {
       let {tree, max} = hugeTreeWithStats();
-      expect(tree.max()).toBe(max);
+      expect(tree.maxValue()).toBe(max);
     });
   });
 
   describe('numNodes()', () => {
-    test.skip('empty tree is empty', () => {
+    test('empty tree is empty', () => {
       expect(emptyTree().numNodes()).toBe(0);
     })
-    test.skip('non-empty tree isn\'t empty', () => {
+    test('non-empty tree isn\'t empty', () => {
       expect(oneTree().numNodes()).toBe(1);
       expect(twoTree().numNodes()).toBe(2);
       expect(fullTree().numNodes()).toBe(4);
@@ -111,10 +111,10 @@ describe('Binary Search Tree', () => {
   });
 
   describe('numLeaves()', () => {
-    test.skip('empty tree is empty', () => {
+    test('empty tree is empty', () => {
       expect(emptyTree().numLeaves()).toBe(0);
     })
-    test.skip('non-empty tree isn\'t empty', () => {
+    test('non-empty tree isn\'t empty', () => {
       expect(oneTree().numLeaves()).toBe(1);
       expect(twoTree().numLeaves()).toBe(1);
       expect(fullTree().numLeaves()).toBe(2);
@@ -122,7 +122,7 @@ describe('Binary Search Tree', () => {
   });
 
   describe('BONUS: doesTreeContainAverage', () => {
-    test.skip('tree does contain average', () => {
+    test('tree does contain average', () => {
       let tree = new BinarySearchTree();
       tree.add(2);
       tree.add(4);
@@ -132,7 +132,7 @@ describe('Binary Search Tree', () => {
       expect(tree.doesTreeContainAverage()).toBe(true);
     });
 
-    test.skip('tree does not contain average', () => {
+    test('tree does not contain average', () => {
       let tree = new BinarySearchTree();
       tree.add(1);
       tree.add(2);

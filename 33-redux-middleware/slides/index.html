@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      33 Redux: Middleware
+    </title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-inline-code {
+        color: rgb(66, 134, 244);
+      }
+
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+# ![CF](http://i.imgur.com/7v5ASc8.png) 33 Redux Middleware
+
+## Objectives
+* Students will be able to create middleware for redux
+* Students will be able to add third party middleware to redux
+
+---
+# Logging
+Wouldn't it be nice if we logged every action that happens in the app, together
+with the state computed after it? When something goes wrong, we can look back
+at our log, and figure out which action corrupted the state.
+
+---
+# Attaching Middleware
+```js
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+
+const todoApp = combineReducers(reducers)
+const store = createStore(
+  todoApp,
+  applyMiddleware(logger, crashReporter)
+)
+```
+
+---
+# Example Logger
+
+```js
+const logger = store => next => action => {
+  console.log('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  return result
+}
+```
+
+---
+# Example Crash Reporter
+```js
+const crashReporter = store => next => action => {
+  try {
+    return next(action)
+  } catch (err) {
+    console.error('Caught an exception!', err)
+    Raven.captureException(err, {
+      extra: {
+        action,
+        state: store.getState()
+      }
+    })
+    throw err
+  }
+}
+```
+
+---
+# Example Timeout Scheduler
+* Schedules actions with { meta: { delay: N } } to be delayed by N milliseconds.
+* Makes `dispatch` return a function to cancel the timeout in this case.
+
+```js
+const timeoutScheduler = store => next => action => {
+  if (!action.meta || !action.meta.delay) {
+    return next(action)
+  }
+
+  const timeoutId = setTimeout(
+    () => next(action),
+    action.meta.delay
+  )
+
+  return function cancel() {
+    clearTimeout(timeoutId)
+  }
+}
+```
+
+---
+# Example Thunk
+
+```js
+const thunk = store => next => action =>
+  typeof action === 'function'
+    ? action(store.dispatch, store.getState)
+    : next(action)
+```
+
+
+    </textarea>
+    <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->
+    <script src="file:///Users/moonmayor/Third/remark/out/remark.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+    <!-- <script src="http://5tephen.com/js/remarkable.js"></script> -->
+  </body>
+</html>

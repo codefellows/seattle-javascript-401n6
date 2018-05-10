@@ -1,0 +1,25 @@
+.compose-email {
+  position: relative;
+
+  .butterbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: yellow;
+    margin: 0 4em;
+    padding: .2em 1em;
+    text-align: center;
+
+    .cancel {
+      text-decoration: underline;
+      color: blue;
+      cursor: pointer;
+    }
+  }
+
+  textarea {
+    width: 90%;
+    height: 10em;
+  }
+}

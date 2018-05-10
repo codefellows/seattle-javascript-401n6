@@ -1,6 +1,6 @@
 import {
-  START_SENDING_EMAIL,
-  CANCEL_SENDING_EMAIL,
+  STARTED_SENDING_EMAIL,
+  CANCELLED_SENDING_EMAIL,
   SEND_EMAIL,
 } from '../actions/email-actions';
 
@@ -14,14 +14,10 @@ export default function counterReducer(state, action) {
   }
   let newState;
   switch(action.type) {
-    case START_SENDING_EMAIL:
-      newState = {
-        ...state,
-        isSending: true,
-        meta: {delay: 3000}
-      };
+    case STARTED_SENDING_EMAIL:
+      newState = {...state, isSending: true};
       return newState;
-    case CANCEL_SENDING_EMAIL:
+    case CANCELLED_SENDING_EMAIL:
       newState = {...state, isSending: false};
       return newState;
     case SEND_EMAIL:

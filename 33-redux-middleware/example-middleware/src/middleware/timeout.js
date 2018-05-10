@@ -4,7 +4,10 @@ const timeout = store => next => action => {
   }
 
   const timeoutId = setTimeout(
-    () => next(action),
+    () => {
+      console.log('timed out')
+      next(action)
+    },
     action.meta.delay
   )
 

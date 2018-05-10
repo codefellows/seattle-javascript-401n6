@@ -3,14 +3,19 @@ import {connect} from 'react-redux';
 import './compose-email.scss';
 
 import {
-  startSendingEmail,
-  cancelSendingEmail,
+  sendEmail,
+  startedSendingEmail,
+  cancelledSendingEmail,
 } from '../../actions/email-actions';
 
 class ComposeEmail extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cancel: undefined
+    };
     this.send = this.send.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   send(ev) {
@@ -21,8 +26,17 @@ class ComposeEmail extends React.Component {
     let body = document.getElementsByName('body')[0];
     
     let params = {to, subject, body};
-    console.log(params);
-    this.props.startSendingEmail(params);
+    this.props.startedSendingEmail();
+    let cancel = this.props.sendEmail(params);
+    this.setState({...this.state, cancel});
+  }
+
+  cancel() {
+    if (this.props.isSending && this.state.cancel) {
+      console.log('cancelling');
+      this.state.cancel();
+      this.props.cancelledSendingEmail();
+    }
   }
 
   render() {
@@ -31,29 +45,29 @@ class ComposeEmail extends React.Component {
     // why? don't ask me, ask these guys:
     // https://stackoverflow.com/questions/24368789/why-is-getelementsbyname-only-usable-from-document-in-javascript
     return <form className="compose-email" onSubmit={this.send}>
-      {(this.props.isSending || true) ?
+      {(this.props.isSending) ?
         <div className="butterbar">
           sending email...
           &nbsp;
-          <span className="cancel" onClick={this.props.cancelSendingEmail}>cancel</span>
+          <span className="cancel" onClick={this.cancel}>cancel</span>
         </div>
         :
         null
       }
       <div>
-        To: <input type="email" name="to"/>
+        To: <input type="email" name="to" placeholder="steve-rip@apple.com"/>
       </div>
       <div>
-        Subject: <input type="text" name="subject"/>
+        Subject: <input type="text" name="subject" placeholder="OSX updates"/>
       </div>
       <div>
         <div>Body:</div>
-        <textarea name="body" col="80" row="40"></textarea>
+        <textarea name="body" col="80" row="40" placeholder="Please don't force me to update."></textarea>
       </div>
       <div>
         <button type="submit">Send</button>
         {this.props.isSending ?
-          <button onClick={this.props.cancelSendingEmail}>Cancel</button> :
+          <button onClick={this.cancel}>Cancel</button> :
           <button disabled>Cancel</button>
         }
       </div>
@@ -69,8 +83,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    startSendingEmail: params => dispatch(startEndingEmail(params)),
-    cancelSendingEmail: () => dispatch(cancelSendingEmail())
+    sendEmail: params => dispatch(sendEmail(params)),
+    startedSendingEmail: ()=> dispatch(startedSendingEmail()),
+    cancelledSendingEmail: () => dispatch(cancelledSendingEmail())
   }
 }
 

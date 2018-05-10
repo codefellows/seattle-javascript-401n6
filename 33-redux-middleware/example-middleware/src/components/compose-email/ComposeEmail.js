@@ -70,6 +70,12 @@ class ComposeEmail extends React.Component {
           <button onClick={this.cancel}>Cancel</button> :
           <button disabled>Cancel</button>
         }
+
+        {if(this.props.isSending) {
+          <button onClick={this.cancel}>Cancel</button>
+        } else {
+          <button disabled>Cancel</button>
+        }}
       </div>
     </form>
   }

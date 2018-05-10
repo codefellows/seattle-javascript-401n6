@@ -55,6 +55,19 @@ const store = createStore(
 # Example Logger
 
 ```js
+const logger = store => reducer => action => {
+  console.log('dispatching', action)
+  let result = reducer(action)
+  console.log('new state', store.getState())
+  return result
+}
+
+
+```
+---
+# Example Logger
+
+```js
 const logger = store => next => action => {
   console.log('dispatching', action)
   let result = next(action)
@@ -71,12 +84,6 @@ const crashReporter = store => next => action => {
     return next(action)
   } catch (err) {
     console.error('Caught an exception!', err)
-    Raven.captureException(err, {
-      extra: {
-        action,
-        state: store.getState()
-      }
-    })
     throw err
   }
 }
@@ -106,6 +113,11 @@ const timeoutScheduler = store => next => action => {
 
 ---
 # Example Thunk
+* The `thunk` middleware intercepts functions that are dispatched as actions and executes them.
+* It allows anything that's not a function to pass through as it regularly would.
+* `thunk` is great for running code like `fetch` that downloads data from the internet asynchronously,
+  then, when it receives the data, has access to dispatch to dispatch an action to update and display
+  results.
 
 ```js
 const thunk = store => next => action =>
@@ -113,6 +125,75 @@ const thunk = store => next => action =>
     ? action(store.dispatch, store.getState)
     : next(action)
 ```
+
+```js
+import {showResults} from './actions/search-actions';
+
+dispatch((dispatch, store) => {
+  fetch('http://www.reddit.com/r/movies.json')
+  .then(res => res.json())
+  .then(json => {
+    dispatch(showResults(json));
+  });
+})
+```
+
+---
+# Reminder: Ternary Statements
+The ternay expression syntax
+`expr ? truthyResult : falsyResult`
+is like an if-statement, but it **evaluates** the truthy or falsy expressions
+(it can store them in a variable immediately).
+
+```js
+let canRideRide = height <= 60 ? "can't ride ride." : "can ride ride";
+```
+
+Compare this to if-else statements, which are purely structural
+and **do not evaluate** into a value.
+
+```js
+let canRideRide = undefined;
+if (height <= 60) {
+  canRideRide = "can't ride ride.";
+} else {
+  canRideRide = "can ride ride";
+}
+```
+
+This is illegal JavaScript:
+
+```js
+let foo = if (something) { "value"} else { "other value"};
+```
+
+---
+# Ternary vs if-else in React
+* Ternary statements often appear inside React apps because templates depend on evaluation.
+* Ternary statements evaluate into things
+* if-else statements redirect the flow of your program, but evaluate into nothing themselves
+* just like it doesn't make sense to say `x = for loop` it doesn't make sense to write `y = if statement`
+
+React likes things to evaluate into things that are rendered on the page.
+
+```js
+{this.props.isSending ?
+  <button onClick={this.cancel}>Cancel</button> :
+  <button disabled>Cancel</button>
+}
+```
+
+React doesn't like if-statements because they don't inherently evaluate into something
+that can be returned on a page.
+
+```js
+{if(this.props.isSending) {
+  <button onClick={this.cancel}>Cancel</button>
+} else {
+  <button disabled>Cancel</button>
+}}
+```
+
 
 
     </textarea>

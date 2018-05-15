@@ -1,12 +1,19 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import Theater from './Theater';
 
 class TheaterList extends React.Component {
   render() {
-    return <div>
-      <Theater />
-    </div>
+    return this.props.theaters.map((theater, i) => {
+      return <Theater key={i} theater={theater} />
+    });
   }
 }
 
-export default TheaterList;
+function mapStateToProps(state) {
+  return {
+    theaters: state.theaters
+  }
+}
+
+export default connect(mapStateToProps)(TheaterList);

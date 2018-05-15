@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  createStore,
-  combineReducers,
-  applyMiddleware,
-} from 'redux';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 
-// const store = createStore(
-//   reducers
-// )
+import reducers from './reducers';
+const store = createStore(reducers);
 
 import ShowtimesPage from './components/ShowtimesPage';
 
 class App extends React.Component {
   render() {
-    return <ShowtimesPage />;
+    return <Provider store={store}>
+      <React.Fragment>
+        <ShowtimesPage />
+      </React.Fragment>
+    </Provider>
   }
 }
 

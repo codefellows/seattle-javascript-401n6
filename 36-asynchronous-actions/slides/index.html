@@ -171,16 +171,26 @@ npm install -g parcel
   * "blazing fast, zero configuration web application bundler"
   * why? _zero configuration_. truly. write your app, not webpack!
 
+---
 # Parcel Dependencies
 * Parcel also came out with a new feature where it automatically
 installs dependencies!
 * Try starting with bare-bones project set up and see what it
   fills in!
 
+You must still create a `.babelrc` file and
+configure presets and install babel stuff manually.
+
 ```js
-yarn add babel-core babel-preset-env babel-preset-react babel-preset-stage-0 react react-dom react-redux react-router-dom redux
+yarn add babel-core babel-preset-env babel-preset-react babel-preset-stage-0
 ```
 
+
+```js
+{
+  presets: ["env", "react", "stage-0"]
+}
+```
 
     </textarea>
     <!-- <script src="https://remarkjs.com/downloads/remark-latest.min.js"> -->

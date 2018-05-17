@@ -4,9 +4,9 @@ import AddMovieForm from '../movies/AddMovieForm';
 import MovieList from '../movies/MovieList';
 
 class Theater extends React.Component {
-  state = {openingMovie: {}, movies: []};
-  componentDidMount() {
-    this.setState({movies: this.theaterMovies()});
+  constructor(props) {
+    super(props);
+    this.state = this.theaterMovies();
   }
 
   theaterMovies() {
@@ -15,7 +15,7 @@ class Theater extends React.Component {
     let openingMovie = this.props.movies[0];
     let openingTime = openingMovie.startHour * 60 + openingMovie.startMinute;
 
-    return this.props.movies.filter(mov => {
+    let movies = this.props.movies.filter(mov => {
       // remember if this movie is playing at this theater to return later.
       let isAtThisTheater = mov.theaterId === this.props.theater.id;
       if (isAtThisTheater) {
@@ -26,27 +26,27 @@ class Theater extends React.Component {
           openingTime = startTime;
         }
       }
-
-      this.setState({openingMovie});
       return isAtThisTheater;
     });
+
+    return {openingMovie, movies};
   }
 
   render() {
-    const {startHour, startMinute} = this.state.openingMovie
-      return <div className="theater-schedule">
-        <h1>{this.props.theater.name}</h1>
-        <h2>Opens at
-          {this.state.openingMovie && `${startHour}:${startMinute}`}
-        </h2>
-        <AddMovieForm />
-        <MovieList movies={this.state.movies}/>
-      </div>
+    const {startHour, startMinute} = this.state.openingMovie;
+    return <div className="theater-schedule">
+      <h1>{this.props.theater.name}</h1>
+      <h2>
+        Opens at {' '}
+        {this.state.openingMovie && `${startHour}:${startMinute}`}
+      </h2>
+      <AddMovieForm />
+      <MovieList movies={this.state.movies}/>
+    </div>
   }
 }
 
 function mapStateToProps(state) {
-  console.log('fkjdfkd', state)
   return {
     movies: state.movies
   }

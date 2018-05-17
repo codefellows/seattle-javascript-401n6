@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import {
   THEATER_CREATE,
   THEATER_UPDATE,
@@ -7,7 +8,7 @@ import {
 class Theater {
   constructor(name, id) {
     this.name = name;
-    this.id = id;
+    this.id = id || uuid();
   }
 }
 
@@ -21,9 +22,11 @@ export default (state, action) => {
     return initialState;
   }
 
-  switch (action) {
-    case THEATER_CREATE:
+  switch (action.type) {
+    case THEATER_CREATE: {
+      let newTheater = new Theater(action.name);
       return [...state, newTheater];
+    }
     case THEATER_UPDATE:
     case THEATER_DELETE:
     default:

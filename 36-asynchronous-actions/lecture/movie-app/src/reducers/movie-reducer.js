@@ -26,7 +26,7 @@ export default (state, action) => {
     return initialState;
   }
 
-  switch (action) {
+  switch (action.type) {
     case MOVIE_CREATE:
       let newMovie = new Movie();
       return [...state, newMovie];

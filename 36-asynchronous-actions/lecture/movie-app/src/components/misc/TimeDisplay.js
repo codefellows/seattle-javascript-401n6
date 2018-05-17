@@ -11,7 +11,7 @@ class TimeDisplay extends React.Component {
 
   render() {
     return <span>
-      {this.prop.hour}:{this.zeroPad(this.props.minutes)}
+      {this.props.hour}:{this.zeroPad(this.props.minutes)}
     </span>
   }
 }

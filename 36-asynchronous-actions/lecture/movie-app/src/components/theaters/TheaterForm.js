@@ -29,6 +29,11 @@ class TheaterForm extends React.Component {
       let newTheater = {...this.props.theater, name};
       this.props.updateTheater(newTheater);
     }
+
+    // only call the onComplete callback if it was actually provided.
+    if (this.props.onComplete) {
+      this.props.onComplete();
+    }
   }
 
   render() {

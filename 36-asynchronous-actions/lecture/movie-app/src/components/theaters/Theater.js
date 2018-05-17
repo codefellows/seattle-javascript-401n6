@@ -9,7 +9,6 @@ class Theater extends React.Component {
   constructor(props) {
     super(props);
     this.state = {isEditing: false};
-    this.startEditing = this.startEditing.bind(this);
   }
 
   moviesAtThisLocation(movies) {
@@ -37,8 +36,12 @@ class Theater extends React.Component {
     return openingMovie;
   }
 
-  startEditing() {
+  startEditing = () => {
     this.setState({isEditing: true});
+  }
+
+  finishEditing = () => {
+    this.setState({isEditing: false});
   }
 
   render() {
@@ -50,7 +53,8 @@ class Theater extends React.Component {
         {this.props.theater.name}
         <button onClick={this.startEditing}>edit</button>
       </h1>
-      {this.state.isEditing && <TheaterForm mode="update" theater={this.props.theater} />}
+      {this.state.isEditing && <TheaterForm mode="update" theater={this.props.theater}
+        onComplete={this.finishEditing}/>}
       <p>
         Opens at <TimeDisplay hour={startHour} minutes={startMinute} />
       </p>

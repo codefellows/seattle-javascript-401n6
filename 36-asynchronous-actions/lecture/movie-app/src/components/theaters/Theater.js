@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import AddMovieForm from '../movies/AddMovieForm';
 import MovieList from '../movies/MovieList';
 import TheaterForm from './TheaterForm';
+import TimeDisplay from '../misc/TimeDisplay';
 
 class Theater extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class Theater extends React.Component {
       </h1>
       {this.state.isEditing && <TheaterForm mode="update" theater={this.props.theater} />}
       <p>
-        Opens at {startHour}:{startMinute}
+        Opens at <TimeDisplay hour={startHour} minutes={startMinute} />
       </p>
       <AddMovieForm theaterId={this.props.theater.id} />
       <MovieList movies={moviesAtThisLocation} />

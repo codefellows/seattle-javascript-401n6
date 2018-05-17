@@ -15,7 +15,7 @@ class Movie {
 
 const initialState = [
   new Movie("The Hobbit", 9, 30, 65),
-  new Movie("Batman", 5, 30, 65),
+  new Movie("Batman", 5, 0, 65),
   new Movie("Fiddler on the Roof", 7, 30, 65),
   new Movie("Star Trek", 8, 20, 31),
   new Movie("Doom", 4, 45, 31),

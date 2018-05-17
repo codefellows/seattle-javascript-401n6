@@ -9,21 +9,25 @@ class TheaterForm extends React.Component {
     if (this.props.theater && this.props.theater.name) {
       this.state.name = this.props.theater.name;
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(ev) {
+  // writing class method with arrow-function so we don't have to bind.
+  // warning: requires at least stage-2 babel-preset.
+  handleChange = (ev) => {
     this.setState({name: ev.target.value});
   }
 
-  handleSubmit(ev) {
+  handleSubmit = (ev) => {
     ev.preventDefault();
     let name = ev.target.getElementsByTagName('input')[0].value;
     if (this.props.mode === "create") {
       this.props.createTheater(name);
     } else if (this.props.mode === "update") {
-      this.props.theater.name = name;
-      this.props.createTheater(this.props.theater);
+      // make sure to use ... spread operator on the original theater object
+      // so it's all entirely copied and we're not mutating the object.
+      // react and redux won't detect the change if we don't make a new one.
+      let newTheater = {...this.props.theater, name};
+      this.props.updateTheater(newTheater);
     }
   }
 

@@ -45,7 +45,6 @@ class Theater extends React.Component {
     const moviesAtThisLocation = this.moviesAtThisLocation(this.props.movies);
     const earliestMovie = this.determineEarliestMovie(moviesAtThisLocation);
     const {startHour, startMinute} = earliestMovie;
-    console.log(earliestMovie, startHour, startMinute);
     return <div className="theater-schedule">
       <h1>
         {this.props.theater.name}

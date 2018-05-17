@@ -30,13 +30,14 @@ export default (state, action) => {
     case THEATER_UPDATE: {
       // map over all the theaters. return each one as it was,
       // but replace the one with a matching-id with the new theater.
-      return state.map(theater => {
+      let result = state.map(theater => {
         if (theater.id === action.theater.id) {
           return action.theater;
         } else {
           return theater;
         }
       });
+      return result;
     }
     case THEATER_DELETE:
     default:

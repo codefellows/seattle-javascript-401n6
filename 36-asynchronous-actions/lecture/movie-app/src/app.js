@@ -2,9 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
+import {inflateMovies} from './actions/movie-actions';
 
 import reducers from './reducers';
 const store = createStore(reducers);
+
+fetch('http://localhost:3000')
+.then(res => res.json())
+.then(json => {
+  console.log('json:', json);
+  store.dispatch(inflateMovies(json));
+})
 
 import ShowtimesPage from './components/ShowtimesPage';
 

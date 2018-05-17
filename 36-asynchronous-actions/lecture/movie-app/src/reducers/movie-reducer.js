@@ -2,16 +2,17 @@ import uuid from 'uuid/v4';
 import {
   MOVIE_CREATE,
   MOVIE_UPDATE,
-  MOVIE_DELETE
+  MOVIE_DELETE,
+  MOVIE_DATA_INFLATE
 } from '../actions/movie-actions';
 
 class Movie {
-  constructor(title, startHour, startMinute, theaterId) {
+  constructor(title, startHour, startMinute, theaterId, id) {
     this.title = title;
     this.startHour = startHour;
     this.startMinute = startMinute;
     this.theaterId = theaterId;
-    this.id = uuid();
+    this.id = id || uuid();
   }
 }
 
@@ -30,6 +31,12 @@ export default (state, action) => {
 
   console.log('inside movie reducer');
   switch (action.type) {
+    case MOVIE_DATA_INFLATE:
+      return action.data.map(mov => {
+        let movie = new Movie(mov.name, mov.startHour, mov.startMinute, mov.theaterId, mov.id)
+        console.log('creating:', movie);
+        return movie;
+      });
     case MOVIE_CREATE:
       let {name, hour, minute, theaterId} = action.movie;
       let newMovie = new Movie(name, hour, minute, theaterId);

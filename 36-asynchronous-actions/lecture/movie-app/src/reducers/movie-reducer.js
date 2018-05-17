@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import {
   MOVIE_CREATE,
   MOVIE_UPDATE,
@@ -10,6 +11,7 @@ class Movie {
     this.startHour = startHour;
     this.startMinute = startMinute;
     this.theaterId = theaterId;
+    this.id = uuid();
   }
 }
 
@@ -35,6 +37,9 @@ export default (state, action) => {
       return [...state, newMovie];
     case MOVIE_UPDATE:
     case MOVIE_DELETE:
+      let result = state.filter(mov => mov.id !== action.movie.id);
+      console.log('deleting result', result);
+      return result;
     default:
       return state;
   }

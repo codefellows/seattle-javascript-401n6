@@ -6,8 +6,8 @@ export const createTheater = (name) => {
   return {type: THEATER_CREATE, name};
 }
 
-export const updateTheater = () => {
-  return {type: THEATER_UPDATE};
+export const updateTheater = (theater) => {
+  return {type: THEATER_UPDATE, theater};
 }
 
 export const deleteTheater = () => {

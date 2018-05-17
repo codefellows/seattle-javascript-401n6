@@ -26,9 +26,12 @@ export default (state, action) => {
     return initialState;
   }
 
+  console.log('inside movie reducer');
   switch (action.type) {
     case MOVIE_CREATE:
-      let newMovie = new Movie();
+      let {name, hour, minute, theaterId} = action.movie;
+      let newMovie = new Movie(name, hour, minute, theaterId);
+      console.log('creating movie', newMovie);
       return [...state, newMovie];
     case MOVIE_UPDATE:
     case MOVIE_DELETE:

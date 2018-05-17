@@ -27,7 +27,17 @@ export default (state, action) => {
       let newTheater = new Theater(action.name);
       return [...state, newTheater];
     }
-    case THEATER_UPDATE:
+    case THEATER_UPDATE: {
+      // map over all the theaters. return each one as it was,
+      // but replace the one with a matching-id with the new theater.
+      return state.map(theater => {
+        if (theater.id === action.theater.id) {
+          return action.theater;
+        } else {
+          return theater;
+        }
+      });
+    }
     case THEATER_DELETE:
     default:
       return state;

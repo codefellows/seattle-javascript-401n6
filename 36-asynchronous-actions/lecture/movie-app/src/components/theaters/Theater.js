@@ -4,6 +4,7 @@ import AddMovieForm from '../movies/AddMovieForm';
 import MovieList from '../movies/MovieList';
 import TheaterForm from './TheaterForm';
 import TimeDisplay from '../misc/TimeDisplay';
+import thatsAllFolks from './thats-all-folks.jpg';
 
 class Theater extends React.Component {
   constructor(props) {
@@ -44,10 +45,25 @@ class Theater extends React.Component {
     this.setState({isEditing: false});
   }
 
-  render() {
-    const moviesAtThisLocation = this.moviesAtThisLocation(this.props.movies);
+  noMovies() {
+    return <React.Fragment>
+      <p>That's all folks! Sorry, no movies showing now.</p>
+      <img style={{maxWidth: "200px"}} src={thatsAllFolks} />
+    </React.Fragment>
+  }
+
+  earliestMovie(moviesAtThisLocation) {
     const earliestMovie = this.determineEarliestMovie(moviesAtThisLocation);
     const {startHour, startMinute} = earliestMovie;
+    return <React.Fragment>
+      Opens at <TimeDisplay hour={startHour} minutes={startMinute} />
+    </React.Fragment>
+  }
+
+  render() {
+    const moviesAtThisLocation = this.moviesAtThisLocation(this.props.movies);
+    let isClosed = moviesAtThisLocation.length === 0;
+
     return <div className="theater-schedule">
       <h1>
         {this.props.theater.name}
@@ -55,11 +71,10 @@ class Theater extends React.Component {
       </h1>
       {this.state.isEditing && <TheaterForm mode="update" theater={this.props.theater}
         onComplete={this.finishEditing}/>}
-      <p>
-        Opens at <TimeDisplay hour={startHour} minutes={startMinute} />
-      </p>
+      {!isClosed && this.earliestMovie(moviesAtThisLocation)}
       <AddMovieForm theaterId={this.props.theater.id} />
-      <MovieList movies={moviesAtThisLocation} />
+      {isClosed && this.noMovies()}
+      {!isClosed && <MovieList movies={moviesAtThisLocation} />}
     </div>
   }
 }

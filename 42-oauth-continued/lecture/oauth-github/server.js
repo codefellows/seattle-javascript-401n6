@@ -5,7 +5,22 @@ let app = express();
 let superagent = require('superagent');
 
 app.get('/', (req, res) => {
+  res.cookie('isNewVisitor', false, {maxAge: 900000});
   res.sendFile('./index.html', {root: './'});
+});
+
+app.get('/new', (req, res) => {
+  let needle = 'isNewVisitor=false';
+  let isNewVisitor = !req.headers.cookie.includes(needle);
+  if (isNewVisitor) {
+    res.write('<h1>Welcome!</h1>');
+    res.write('<p>You\'re new here</p>');
+    res.end();
+  } else {
+    res.write('<h1>Welcome!</h1>');
+    res.write('<p>Oh, I see you\'ve been here before.</p>');
+    res.end();
+  }
 });
 
 app.get('/oauth-callback', (req, res) => {
@@ -25,10 +40,30 @@ app.get('/oauth-callback', (req, res) => {
   })
   .then(tokenResponse => {
     let token = tokenResponse.body.access_token;
-    let userUrl = 'https://api.github.com/user?';
-    userUrl += 'access_token=' + token;
-    return superagent.get(userUrl);
-  })
+    token = 'cheat' + token + 'cheat';
+    res.cookie('oauth-token', token, {maxAge: 100000});
+    res.write('<h1>Authorized!</h1>');
+    res.write(`<p>Token: ${token}</p>`);
+    res.write('<a href="/profile">see your profile</a>');
+    res.end();
+  });
+});
+
+app.get('/profile', (req, res) => {
+  let needle = 'oauth-token';
+  let isLoggedIn = req.headers.cookie.includes(needle);
+  if (!isLoggedIn) {
+    res.write('<h1>Unauthorized</h1>');
+    res.write('<p>You must log in to view this page.</p>');
+    res.end();
+    return;
+  }
+
+  // cheat87869879f89872929080cheat
+  let token = req.headers.cookie.split('cheat')[1];
+  let userUrl = 'https://api.github.com/user?';
+  userUrl += 'access_token=' + token;
+  superagent.get(userUrl)
   .then(userResponse => {
     let username = userResponse.body.login;
     let bio = userResponse.body.bio;

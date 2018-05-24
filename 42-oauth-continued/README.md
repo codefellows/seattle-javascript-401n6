@@ -4,6 +4,9 @@
 ## Learning Objectives
 * Students will learn Front End Oauth Workflow
 
-## Readings
-* [Google OAuth frontend](https://developers.google.com/identity/protocols/OAuth2UserAgent)
+## Resources
 * [Github OAuth](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
+* [OAuth 2.0 An Overview](https://www.youtube.com/watch?v=CPbvxxslDTU)
+* [Where to Store Tokens](https://auth0.com/docs/security/store-tokens)
+* [Express API](http://expressjs.com/en/api.html)
+  * search for `res.cookie`

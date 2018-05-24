@@ -6,3 +6,4 @@
 
 ## Readings
 * [Google OAuth frontend](https://developers.google.com/identity/protocols/OAuth2UserAgent)
+* [Github OAuth](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)

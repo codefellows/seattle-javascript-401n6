@@ -47,11 +47,18 @@ app.get('/', (req, res) => {
   res.sendFile('./index.html', {root:'./'});
 })
 
-app.get('/cookie2', (req, res) => {
+app.get('/cookie-setter', (req, res) => {
   res.cookie('my-custom-cookie', 'snickerdoodle', {maxAge: 900000})
   res.cookie('my-short-lived-cookie', 'ten seconds', {maxAge: 10000})
   res.cookie('my-longer-lived-cookie', 'one-hundred seconds!', {maxAge: 100000})
-  res.send('<h1>cookies again</h1>')
+  res.send('<h1>setting cookies</h1>')
+});
+
+app.get('/cookie-inspector', (req, res) => {
+  console.log('cookie req', req);
+  res.write('<h1>reading cookies</h1>')
+  res.write('<pre>' + req.headers.cookie + '</pre>');
+  res.end();
 });
 
 app.listen(3000, () => {

@@ -22,9 +22,10 @@ app.get('/oauth-callback', function(req, res) {
     code: code,
     state:  state,
   })
-  .then((res) => {
-    console.log('token', res.body);
-  
+  .then((response) => {
+    console.log('token', response.body);
+    res.send(response.body);
+    res.end();
   });
 });
 

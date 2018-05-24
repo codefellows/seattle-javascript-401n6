@@ -47,6 +47,13 @@ app.get('/', (req, res) => {
   res.sendFile('./index.html', {root:'./'});
 })
 
+app.get('/cookie2', (req, res) => {
+  res.cookie('my-custom-cookie', 'snickerdoodle', {maxAge: 900000})
+  res.cookie('my-short-lived-cookie', 'ten seconds', {maxAge: 10000})
+  res.cookie('my-longer-lived-cookie', 'one-hundred seconds!', {maxAge: 100000})
+  res.send('<h1>cookies again</h1>')
+});
+
 app.listen(3000, () => {
   console.log('listening on port 3000');
 });

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OAuth Login</title>
+  </head>
+  <body>
+    <h1>GitHub OAUTH Demo:</h1>
+
+    <script>
+      let a = document.createElement('a');
+      let AUTH_URL = 'https://github.com/login/oauth/authorize';
+      let urlParams = { 
+        client_id: 'f0d91ea8c6c281a3dc9f',
+        redirect_uri: 'http://localhost:3000/oauth-callback',
+        state: 'sdfdfdsfsfdfdfdsfdfsd',
+      };
+      let formattedURL = AUTH_URL + '?';
+      for (let key in urlParams) {
+        formattedURL += '&' + key + '=' + urlParams[key];
+      }                 
+
+      a.setAttribute('href', formattedURL);
+      a.textContent = 'login with GitHub';
+      console.log('the URL we built:', formattedURL);
+      document.body.append(a);
+    </script>
+  </body>
+</html>
+

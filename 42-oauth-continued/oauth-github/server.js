@@ -21,16 +21,16 @@ app.get('/oauth-callback', function(req, res) {
     redirect_uri: process.env.REDIRECT_URI,
     code: code,
     state:  state,
-    //scopes: 'repo';
+    scopes: 'repo'
   })
   .then((response) => {
     console.log('token', response.body);
 
     let user = 'geluso';
     let userUrl = 'https://api.github.com/user';
-    userUrl += '?access_token=' + response.body.access_token;
     console.log('getting resources from:', userUrl);
-    return superagent.get(userUrl);
+    return superagent.get(userUrl)
+    .set('Authorization', 'token ' + response.body.access_token)
   })
   .then(response => {
     console.log('access response', response);

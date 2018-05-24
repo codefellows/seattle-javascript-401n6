@@ -5,9 +5,15 @@
   </head>
   <body>
     <h1>GitHub OAUTH Demo:</h1>
+    <div>
+      <a id="authorize"></a>
+    </div>
+    <div>
+      <a id="review"></a>
+    </div>
 
     <script>
-      let a = document.createElement('a');
+      let a = document.getElementById('authorize');
       let AUTH_URL = 'https://github.com/login/oauth/authorize';
       let urlParams = { 
         client_id: 'f0d91ea8c6c281a3dc9f',
@@ -22,7 +28,12 @@
       a.setAttribute('href', formattedURL);
       a.textContent = 'login with GitHub';
       console.log('the URL we built:', formattedURL);
-      document.body.append(a);
+
+      let clientId = 'f0d91ea8c6c281a3dc9f';
+      let reviewUrl = 'https://github.com/settings/connections/applications/' + clientId;
+      let reviewLink = document.getElementById('review');
+      reviewLink.setAttribute('href', reviewUrl);
+      reviewLink.textContent = 'review permissions';
     </script>
   </body>
 </html>

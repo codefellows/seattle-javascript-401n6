@@ -12,7 +12,7 @@
       let urlParams = { 
         client_id: 'f0d91ea8c6c281a3dc9f',
         redirect_uri: 'http://localhost:3000/oauth-callback',
-        state: 'sdfdfdsfsfdfdfdsfdfsd',
+        state: '' + Math.random(),
       };
       let formattedURL = AUTH_URL + '?';
       for (let key in urlParams) {

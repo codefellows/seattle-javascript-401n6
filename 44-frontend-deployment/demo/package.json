@@ -1,0 +1,29 @@
+{
+  "name": "44-pagination",
+  "version": "1.0.0",
+  "description": "* Write a script that reads `movie_titles.csv`, parses it and populates   a MongoDB database. * Write a server endpoint that returns movies   * `?q=` The endpoint should be queryable by title   * `?min=` The endpoint should be queryable by min-year   * `?max=` The endpoint should be queryable by max-year   * `?count=` The endpoint should return results 100 at time   * `?page=` The endpoint should support pagination",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-autobind-class-methods": "^5.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.2",
+    "parcel-bundler": "^1.8.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.8.2"
+  }
+}

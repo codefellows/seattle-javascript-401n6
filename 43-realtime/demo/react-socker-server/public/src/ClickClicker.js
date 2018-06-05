@@ -1,15 +1,14 @@
 import React, {Component, Fragment} from 'react';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:3000');
-socket.on('connect', () => {
-  console.log('clicker connected', socket.id);
-});
+import socket from './socket-context';
 
 export default class ClickClicker extends Component {
   sendClick = () => {
-    console.log('client clicked');
+    console.log('client clicked', socket.id);
     socket.emit('increment-click');
+  }
+
+  componentDidMount() {
+    console.log('clicker id', socket.id);
   }
 
   render() {

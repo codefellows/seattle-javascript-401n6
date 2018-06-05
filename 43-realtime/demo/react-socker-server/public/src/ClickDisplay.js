@@ -1,10 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:3000');
-socket.on('connect', () => {
-  console.log('display connected', socket.id);
-});
+import socket from './socket-context';
 
 export default class ClickDisplay extends Component {
   state = {
@@ -13,16 +8,14 @@ export default class ClickDisplay extends Component {
 
   componentDidMount() {
     socket.on('click-info', (info) => {
-      console.log('got click info', info);
+      console.log('display got info', socket.id, info);
       this.setState({clicks: info.clicks});
-    })
+    });
   }
 
   render() {
-    return <Fragment>
-      <p>
-        Total clicks: {this.state.clicks}
-      </p>
-    </Fragment>
+    return <p>
+      Total clicks: {this.state.clicks}
+    </p>
   }
 }

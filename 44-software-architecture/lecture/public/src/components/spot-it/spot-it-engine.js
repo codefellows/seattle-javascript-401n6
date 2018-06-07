@@ -1,3 +1,6 @@
+import card1Image from './01.png';
+import card2Image from './55.png';
+
 export default class SpotItEngine {
   constructor() {
     this.isGameOver = false;
@@ -9,6 +12,8 @@ export default class SpotItEngine {
     this.card2 = ["padlock", "lips", "anchor", "music-note", "flower", "exclamation-point", "car", "key"];
     this.card1.sort(() => Math.random() < .5 ? -1 : 1);
     this.card2.sort(() => Math.random() < .5 ? -1 : 1);
+    this.card1Image = card1Image;
+    this.card2Image = card2Image;
     this.guessesLeft = 3;
   }
 
@@ -18,6 +23,8 @@ export default class SpotItEngine {
       card2: this.card2,
       guessesLeft: this.guessesLeft,
       isGameOver: this.isGameOver,
+      card1Image: this.card1Image,
+      card2Image: this.card2Image,
     }
   }
 

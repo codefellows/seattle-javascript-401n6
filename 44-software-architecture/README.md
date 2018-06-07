@@ -24,6 +24,15 @@ Here's several layers we're already familiar with:
 * Front End (visual output)
 * Front End (mouse and keyboard input)
 
+# Stories, APIs, Work Estimates and Parallelization
+An added benefit of compartmentalizing your application is it makes it easier
+for developers to assign their work, make estimations and actually allow people
+to work from different ends of a problem at once.
+
+If you can agree on the input and output of different pieces of your software
+then you can create mock data to use for your own part until someone actually
+finished their other piece.
+
 # Separate UI Presentation from Business Logic
 One strategy that makes applications much easier to deal with is specifically
 separating the UI layer from anything that deals with business logic.
@@ -102,3 +111,4 @@ class TicTacToe extends Component {
   }
 }
 ```
+
